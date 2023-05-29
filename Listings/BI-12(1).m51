@@ -1,0 +1,1760 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    05/29/2023  20:18:32  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj, .\Objects\Device_Init.obj, .\Objects\my_fnc.obj, .\Objects\wizchip_conf.
+>> obj, .\Objects\w5500.obj, .\Objects\STARTUP.obj, .\Objects\my_wiznet.obj TO .\Objects\BI-12(1) PRINT (.\Listings\BI-1
+>> 2(1).m51) RAMSIZE (256) XDATA (0X0000-0X0FFF)
+
+
+MEMORY MODEL: LARGE
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  .\Objects\Device_Init.obj (DEVICE_INIT)
+  .\Objects\my_fnc.obj (MY_FNC)
+  .\Objects\wizchip_conf.obj (WIZCHIP_CONF)
+  .\Objects\w5500.obj (W5500)
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\my_wiznet.obj (MY_WIZNET)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C_INIT)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?COPY)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?CLDPTR)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?CLDOPTR)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?CSTPTR)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?CSTOPTR)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?ILDIX)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?ILDPTR)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?ILDOPTR)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?ISTPTR)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?ISTOPTR)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?ULSHR)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?LSHL)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?LSTXDATA)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?LSTKXDATA)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?ICALL)
+  C:\KEIL_V5\C51\LIB\C51L.LIB (?C?MEMCMP)
+
+
+LINK MAP OF MODULE:  .\Objects\BI-12(1) (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+            XDATA   0000H     004BH     UNIT         ?XD?MAIN
+            XDATA   004BH     0034H     UNIT         _XDATA_GROUP_
+            XDATA   007FH     0027H     UNIT         ?XD?WIZCHIP_CONF
+            XDATA   00A6H     000BH     UNIT         ?XD?_CTLWIZCHIP?WIZCHIP_CONF
+            XDATA   00B1H     0009H     UNIT         ?XD?_FREQ_GEN?MY_FNC
+            XDATA   00BAH     0006H     UNIT         ?XD?_REG_WIZCHIP_BUS_CBFUNC?WIZCHIP_CONF
+            XDATA   00C0H     0005H     UNIT         ?XD?_GETSN_TX_FSR?W5500
+            XDATA   00C5H     0005H     UNIT         ?XD?_WIZ_RECV_IGNORE?W5500
+            XDATA   00CAH     0003H     UNIT         ?XD?_DACD?MY_FNC
+            XDATA   00CDH     0003H     UNIT         ?XD?_DACOS?MY_FNC
+            XDATA   00D0H     0003H     UNIT         ?XD?_CTLNETWORK?WIZCHIP_CONF
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 2
+
+
+            XDATA   00D3H     0003H     UNIT         ?XD?_WIZPHY_GETPHYCONF?WIZCHIP_CONF
+            XDATA   00D6H     0003H     UNIT         ?XD?_WIZPHY_GETPHYSTAT?WIZCHIP_CONF
+            XDATA   00D9H     0003H     UNIT         ?XD?_WIZCHIP_SETNETINFO?WIZCHIP_CONF
+            XDATA   00DCH     0003H     UNIT         ?XD?_WIZCHIP_GETNETINFO?WIZCHIP_CONF
+            XDATA   00DFH     0003H     UNIT         ?XD?_WIZCHIP_SETTIMEOUT?WIZCHIP_CONF
+            XDATA   00E2H     0003H     UNIT         ?XD?_WIZCHIP_GETTIMEOUT?WIZCHIP_CONF
+            XDATA   00E5H     0002H     UNIT         ?XD?_SPI_DAC_WRITE?MY_FNC
+            XDATA   00E7H     0002H     UNIT         ?XD?_WIZCHIP_CLRINTERRUPT?WIZCHIP_CONF
+            XDATA   00E9H     0001H     UNIT         ?XD?WIZCHIP_GETINTERRUPT?WIZCHIP_CONF
+            XDATA   00EAH     0001H     UNIT         ?XD?_WIZCHIP_SETINTERRUPTMASK?WIZCHIP_CONF
+            XDATA   00EBH     0001H     UNIT         ?XD?WIZCHIP_GETINTERRUPTMASK?WIZCHIP_CONF
+            XDATA   00ECH     0001H     UNIT         ?XD?WIZPHY_GETPHYLINK?WIZCHIP_CONF
+            XDATA   00EDH     0001H     UNIT         ?XD?WIZPHY_GETPHYPMODE?WIZCHIP_CONF
+            XDATA   00EEH     0001H     UNIT         ?XD?_WIZPHY_SETPHYCONF?WIZCHIP_CONF
+            XDATA   00EFH     0001H     UNIT         ?XD?_WIZPHY_SETPHYPMODE?WIZCHIP_CONF
+            XDATA   00F0H     0001H     UNIT         ?XD?_WIZCHIP_SETNETMODE?WIZCHIP_CONF
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0448H     UNIT         ?C?LIB_CODE
+            CODE    044BH     0247H     UNIT         ?PR?_CTLWIZCHIP?WIZCHIP_CONF
+            CODE    0692H     01C8H     UNIT         ?PR?_PASSADDR?MY_WIZNET
+            CODE    085AH     01A9H     UNIT         ?PR?_WIZCHIP_READ_BUF?W5500
+            CODE    0A03H     019AH     UNIT         ?PR?_WIZCHIP_WRITE_BUF?W5500
+            CODE    0B9DH     0196H     UNIT         ?PR?_WIZCHIP_INIT?WIZCHIP_CONF
+            CODE    0D33H     0163H     UNIT         ?PR?_WIZ_SEND_DATA?W5500
+            CODE    0E96H     0159H     UNIT         ?PR?_WIZ_RECV_DATA?W5500
+            CODE    0FEFH     0142H     UNIT         ?PR?_WIZCHIP_READ?W5500
+            CODE    1131H     013DH     UNIT         ?PR?_WIZCHIP_WRITE?W5500
+            CODE    126EH     00EFH     UNIT         ?PR?MAIN?MAIN
+            CODE    135DH     00EFH     UNIT         ?PR?_GETSN_RX_RSR?W5500
+            CODE    144CH     00ECH     UNIT         ?PR?WIZCHIP_SW_RESET?WIZCHIP_CONF
+            CODE    1538H     00E3H     UNIT         ?PR?_GETSN_TX_FSR?W5500
+            CODE    161BH     00D5H     UNIT         ?PR?_WIZCHIP_GETNETINFO?WIZCHIP_CONF
+            CODE    16F0H     00D4H     UNIT         ?PR?_WIZCHIP_SETNETINFO?WIZCHIP_CONF
+            CODE    17C4H     00CFH     UNIT         ?PR?_WIZ_RECV_IGNORE?W5500
+            CODE    1893H     00C3H     UNIT         ?PR?_WIZ_INIT?MY_WIZNET
+            CODE    1956H     00C0H     UNIT         ?PR?_WIZPHY_GETPHYCONF?WIZCHIP_CONF
+            CODE    1A16H     008CH     UNIT         ?C_C51STARTUP
+            CODE    1AA2H     008BH     UNIT         ?PR?_CTLNETWORK?WIZCHIP_CONF
+            CODE    1B2DH     0088H     UNIT         ?PR?_WIZCHIP_RECV_DATA?MAIN
+            CODE    1BB5H     0082H     UNIT         ?C_INITSEG
+            CODE    1C37H     007AH     UNIT         ?PR?_WIZCHIP_CLRINTERRUPT?WIZCHIP_CONF
+            CODE    1CB1H     0078H     UNIT         ?PR?_FREQ_GEN?MY_FNC
+            CODE    1D29H     0076H     UNIT         ?PR?_REG_WIZCHIP_BUS_CBFUNC?WIZCHIP_CONF
+            CODE    1D9FH     0076H     UNIT         ?PR?_REG_WIZCHIP_SPI_CBFUNC?WIZCHIP_CONF
+            CODE    1E15H     0076H     UNIT         ?PR?_REG_WIZCHIP_SPIBURST_CBFUNC?WIZCHIP_CONF
+            CODE    1E8BH     0075H     UNIT         ?PR?_WIZPHY_SETPHYCONF?WIZCHIP_CONF
+            CODE    1F00H     006FH     UNIT         ?PR?_REG_WIZCHIP_CRIS_CBFUNC?WIZCHIP_CONF
+            CODE    1F6FH     006FH     UNIT         ?PR?_REG_WIZCHIP_CS_CBFUNC?WIZCHIP_CONF
+            CODE    1FDEH     0062H     UNIT         ?PR?_WIZPHY_SETPHYPMODE?WIZCHIP_CONF
+            CODE    2040H     0060H     UNIT         ?PR?_WIZCHIP_GETTIMEOUT?WIZCHIP_CONF
+            CODE    20A0H     005FH     UNIT         ?PR?_WIZCHIP_SETTIMEOUT?WIZCHIP_CONF
+            CODE    20FFH     0047H     UNIT         ?PR?MY_SPI_RB?MY_WIZNET
+            CODE    2146H     0047H     UNIT         ?PR?_READ_BUF?MY_WIZNET
+            CODE    218DH     0043H     UNIT         ?PR?_WIZPHY_GETPHYSTAT?WIZCHIP_CONF
+            CODE    21D0H     003AH     UNIT         ?PR?WIZPHY_RESET?WIZCHIP_CONF
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 3
+
+
+            CODE    220AH     0038H     UNIT         ?PR?_WRITE_BUF?MY_WIZNET
+            CODE    2242H     0034H     UNIT         ?PR?_SPI_DAC_WRITE?MY_FNC
+            CODE    2276H     0032H     UNIT         ?PR?WIZCHIP_GETINTERRUPT?WIZCHIP_CONF
+            CODE    22A8H     0031H     UNIT         ?PR?_WIZCHIP_SETNETMODE?WIZCHIP_CONF
+            CODE    22D9H     0030H     UNIT         ?PR?WIZCHIP_GETINTERRUPTMASK?WIZCHIP_CONF
+            CODE    2309H     0028H     UNIT         ?PR?_DACD?MY_FNC
+            CODE    2331H     0028H     UNIT         ?PR?_DACOS?MY_FNC
+            CODE    2359H     0028H     UNIT         ?PR?_WIZCHIP_SETINTERRUPTMASK?WIZCHIP_CONF
+            CODE    2381H     0027H     UNIT         ?PR?WIZPHY_GETPHYPMODE?WIZCHIP_CONF
+            CODE    23A8H     0022H     UNIT         ?PR?_WIZCHIP_BUS_WRITEDATA?WIZCHIP_CONF
+            CODE    23CAH     001DH     UNIT         ?PR?WIZPHY_GETPHYLINK?WIZCHIP_CONF
+            CODE    23E7H     0017H     UNIT         ?PR?_SPI_DDS_WRITE?MY_FNC
+            CODE    23FEH     0014H     UNIT         ?PR?_MY_SPI_WB?MY_WIZNET
+            CODE    2412H     0012H     UNIT         ?PR?_WIZCHIP_SPI_READBURST?WIZCHIP_CONF
+            CODE    2424H     0012H     UNIT         ?PR?_WIZCHIP_SPI_WRITEBURST?WIZCHIP_CONF
+            CODE    2436H     0010H     UNIT         ?PR?PORT_IO_INIT?DEVICE_INIT
+            CODE    2446H     0010H     UNIT         ?PR?_DEV_MUX?MY_FNC
+            CODE    2456H     0010H     UNIT         ?PR?_OUT_MUX?MY_FNC
+            CODE    2466H     0010H     UNIT         ?PR?_DELAY?MY_WIZNET
+            CODE    2476H     000BH     UNIT         ?PR?_WIZCHIP_BUS_READDATA?WIZCHIP_CONF
+            CODE    2481H     000BH     UNIT         ?PR?WIZCHIP_GETNETMODE?WIZCHIP_CONF
+            CODE    248CH     0009H     UNIT         ?PR?DEVICE_INIT?DEVICE_INIT
+            CODE    2495H     0009H     UNIT         ?PR?TIMER_START?MY_FNC
+            CODE    249EH     0007H     UNIT         ?PR?PCA_INIT?DEVICE_INIT
+            CODE    24A5H     0006H     UNIT         ?PR?TIMECTL?MY_FNC
+            CODE    24ABH     0006H     UNIT         ?PR?_WIZCHIP_SPI_WRITEBYTE?WIZCHIP_CONF
+            CODE    24B1H     0006H     UNIT         ?CO?WIZCHIP_CONF
+            CODE    24B7H     0006H     UNIT         ?CO?MY_WIZNET
+            CODE    24BDH     0004H     UNIT         ?PR?OSCILLATOR_INIT?DEVICE_INIT
+            CODE    24C1H     0004H     UNIT         ?PR?MY_CRIS_EN?MY_WIZNET
+            CODE    24C5H     0004H     UNIT         ?PR?MY_CRIS_EX?MY_WIZNET
+            CODE    24C9H     0003H     UNIT         ?PR?WIZCHIP_SPI_READBYTE?WIZCHIP_CONF
+            CODE    24CCH     0003H     UNIT         ?PR?MY_CS_SEL?MY_WIZNET
+            CODE    24CFH     0003H     UNIT         ?PR?MY_CS_DESEL?MY_WIZNET
+            CODE    24D2H     0001H     UNIT         ?PR?WIZCHIP_CRIS_ENTER?WIZCHIP_CONF
+            CODE    24D3H     0001H     UNIT         ?PR?WIZCHIP_CRIS_EXIT?WIZCHIP_CONF
+            CODE    24D4H     0001H     UNIT         ?PR?WIZCHIP_CS_SELECT?WIZCHIP_CONF
+            CODE    24D5H     0001H     UNIT         ?PR?WIZCHIP_CS_DESELECT?WIZCHIP_CONF
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\BI-12(1) (MAIN)
+
+
+SEGMENT                                            XDATA_GROUP
+  +--> CALLED SEGMENT                            START    LENGTH
+----------------------------------------------------------------
+?C_C51STARTUP                                    -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                                    -----    -----
+  +--> ?PR?DEVICE_INIT?DEVICE_INIT
+  +--> ?PR?TIMER_START?MY_FNC
+  +--> ?PR?_WIZ_INIT?MY_WIZNET
+  +--> ?PR?_WIZCHIP_READ?W5500
+  +--> ?PR?_WIZCHIP_WRITE?W5500
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 4
+
+
+  +--> ?PR?TIMECTL?MY_FNC
+  +--> ?PR?_GETSN_RX_RSR?W5500
+  +--> ?PR?_WIZCHIP_RECV_DATA?MAIN
+
+?PR?DEVICE_INIT?DEVICE_INIT                      -----    -----
+  +--> ?PR?PCA_INIT?DEVICE_INIT
+  +--> ?PR?PORT_IO_INIT?DEVICE_INIT
+  +--> ?PR?OSCILLATOR_INIT?DEVICE_INIT
+
+?PR?_WIZ_INIT?MY_WIZNET                          004BH    000CH
+  +--> ?PR?MY_CS_DESEL?MY_WIZNET
+  +--> ?PR?MY_CS_SEL?MY_WIZNET
+  +--> ?PR?_REG_WIZCHIP_CS_CBFUNC?WIZCHIP_CONF
+  +--> ?PR?_MY_SPI_WB?MY_WIZNET
+  +--> ?PR?MY_SPI_RB?MY_WIZNET
+  +--> ?PR?_REG_WIZCHIP_SPI_CBFUNC?WIZCHIP_CONF
+  +--> ?PR?_WRITE_BUF?MY_WIZNET
+  +--> ?PR?_READ_BUF?MY_WIZNET
+  +--> ?PR?_REG_WIZCHIP_SPIBURST_CBFUNC?WIZC...
+  +--> ?PR?MY_CRIS_EX?MY_WIZNET
+  +--> ?PR?MY_CRIS_EN?MY_WIZNET
+  +--> ?PR?_REG_WIZCHIP_CRIS_CBFUNC?WIZCHIP_...
+  +--> ?PR?_WIZCHIP_INIT?WIZCHIP_CONF
+  +--> ?PR?_PASSADDR?MY_WIZNET
+
+?PR?_REG_WIZCHIP_CS_CBFUNC?WIZCHIP_CONF          0057H    0006H
+  +--> ?PR?WIZCHIP_CS_SELECT?WIZCHIP_CONF
+  +--> ?PR?WIZCHIP_CS_DESELECT?WIZCHIP_CONF
+
+?PR?MY_SPI_RB?MY_WIZNET                          005DH    0002H
+
+?PR?_REG_WIZCHIP_SPI_CBFUNC?WIZCHIP_CONF         0057H    0006H
+  +--> ?PR?WIZCHIP_SPI_READBYTE?WIZCHIP_CONF
+  +--> ?PR?_WIZCHIP_SPI_WRITEBYTE?WIZCHIP_CONF
+
+?PR?_WIZCHIP_SPI_WRITEBYTE?WIZCHIP_CONF          005DH    0001H
+
+?PR?_WRITE_BUF?MY_WIZNET                         0057H    0004H
+  +--> ?PR?_MY_SPI_WB?MY_WIZNET
+
+?PR?_READ_BUF?MY_WIZNET                          0057H    0006H
+  +--> ?PR?MY_SPI_RB?MY_WIZNET
+
+?PR?_REG_WIZCHIP_SPIBURST_CBFUNC?WIZC...         0057H    0006H
+  +--> ?PR?_WIZCHIP_SPI_READBURST?WIZCHIP_CONF
+  +--> ?PR?_WIZCHIP_SPI_WRITEBURST?WIZCHIP_CONF
+
+?PR?_WIZCHIP_SPI_READBURST?WIZCHIP_CONF          005DH    0005H
+
+?PR?_WIZCHIP_SPI_WRITEBURST?WIZCHIP_CONF         005DH    0005H
+
+?PR?_REG_WIZCHIP_CRIS_CBFUNC?WIZCHIP_...         0057H    0006H
+  +--> ?PR?WIZCHIP_CRIS_ENTER?WIZCHIP_CONF
+  +--> ?PR?WIZCHIP_CRIS_EXIT?WIZCHIP_CONF
+
+?PR?_WIZCHIP_INIT?WIZCHIP_CONF                   0057H    0008H
+  +--> ?PR?WIZCHIP_SW_RESET?WIZCHIP_CONF
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 5
+
+
+  +--> ?PR?_WIZCHIP_WRITE?W5500
+
+?PR?WIZCHIP_SW_RESET?WIZCHIP_CONF                005FH    0012H
+  +--> ?PR?_WIZCHIP_READ_BUF?W5500
+  +--> ?PR?_WIZCHIP_WRITE?W5500
+  +--> ?PR?_WIZCHIP_READ?W5500
+  +--> ?PR?_WIZCHIP_WRITE_BUF?W5500
+
+?PR?_WIZCHIP_READ_BUF?W5500                      0071H    000EH
+
+?PR?_WIZCHIP_WRITE?W5500                         0071H    0009H
+
+?PR?_WIZCHIP_READ?W5500                          0071H    0008H
+
+?PR?_WIZCHIP_WRITE_BUF?W5500                     0071H    000EH
+
+?PR?_PASSADDR?MY_WIZNET                          0057H    0015H
+  +--> ?CO?MY_WIZNET
+  +--> ?PR?_WIZCHIP_WRITE_BUF?W5500
+  +--> ?PR?_DELAY?MY_WIZNET
+  +--> ?PR?_WIZCHIP_READ_BUF?W5500
+
+?PR?_GETSN_RX_RSR?W5500                          004EH    0005H
+  +--> ?PR?_WIZCHIP_READ?W5500
+
+?PR?_WIZCHIP_RECV_DATA?MAIN                      004BH    0003H
+  +--> ?PR?_GETSN_RX_RSR?W5500
+  +--> ?PR?_WIZCHIP_READ?W5500
+  +--> ?PR?_WIZ_RECV_DATA?W5500
+  +--> ?PR?_WIZ_SEND_DATA?W5500
+  +--> ?PR?_WIZCHIP_WRITE?W5500
+
+?PR?_WIZ_RECV_DATA?W5500                         004EH    000CH
+  +--> ?PR?_WIZCHIP_READ?W5500
+  +--> ?PR?_WIZCHIP_READ_BUF?W5500
+  +--> ?PR?_WIZCHIP_WRITE?W5500
+
+?PR?_WIZ_SEND_DATA?W5500                         004EH    000CH
+  +--> ?PR?_WIZCHIP_READ?W5500
+  +--> ?PR?_WIZCHIP_WRITE_BUF?W5500
+  +--> ?PR?_WIZCHIP_WRITE?W5500
+
+?C_INITSEG                                       -----    -----
+  +--> ?PR?WIZCHIP_CRIS_ENTER?WIZCHIP_CONF
+  +--> ?PR?WIZCHIP_CRIS_EXIT?WIZCHIP_CONF
+  +--> ?PR?WIZCHIP_CS_SELECT?WIZCHIP_CONF
+  +--> ?PR?WIZCHIP_CS_DESELECT?WIZCHIP_CONF
+  +--> ?PR?_WIZCHIP_BUS_READDATA?WIZCHIP_CONF
+  +--> ?PR?_WIZCHIP_BUS_WRITEDATA?WIZCHIP_CONF
+
+?PR?_WIZCHIP_BUS_WRITEDATA?WIZCHIP_CONF          004BH    0005H
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\BI-12(1) (MAIN)
+
+  VALUE           TYPE          NAME
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 6
+
+
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  X:0000H         PUBLIC        rx_buf
+  C:1B2DH         PUBLIC        _wizchip_recv_data
+  X:0014H         PUBLIC        ipadr
+  X:0018H         PUBLIC        StatData
+  X:0020H         PUBLIC        actual_len
+  X:0022H         PUBLIC        freqs
+  C:126EH         PUBLIC        main
+  X:003AH         PUBLIC        mask
+  X:003EH         PUBLIC        mac
+  D:0089H         PUBLIC        TMOD
+  X:0044H         PUBLIC        len
+  X:0046H         PUBLIC        gw
+  X:004AH         PUBLIC        a
+  -------         PROC          _WIZCHIP_RECV_DATA
+  X:004BH         SYMBOL        StatData
+  C:1B2DH         LINE#         23
+  C:1B38H         LINE#         24
+  C:1B45H         LINE#         25
+  C:1B7DH         LINE#         26
+  C:1B90H         LINE#         27
+  C:1BA4H         LINE#         28
+  -------         ENDPROC       _WIZCHIP_RECV_DATA
+  -------         PROC          MAIN
+  C:126EH         LINE#         31
+  C:126EH         LINE#         32
+  C:126EH         LINE#         34
+  C:1271H         LINE#         37
+  C:1274H         LINE#         38
+  C:1277H         LINE#         41
+  C:12A6H         LINE#         43
+  C:12A6H         LINE#         44
+  C:12C5H         LINE#         45
+  C:12C5H         LINE#         47
+  C:12D6H         LINE#         48
+  C:12F8H         LINE#         49
+  C:12FBH         LINE#         50
+  C:130BH         LINE#         51
+  C:130EH         LINE#         52
+  C:130EH         LINE#         54
+  C:131FH         LINE#         55
+  C:1322H         LINE#         56
+  C:1324H         LINE#         57
+  C:1324H         LINE#         59
+  C:1334H         LINE#         60
+  C:1345H         LINE#         61
+  C:1345H         LINE#         63
+  C:1351H         LINE#         64
+  C:135AH         LINE#         65
+  C:135AH         LINE#         66
+  C:135AH         LINE#         67
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 7
+
+
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        DEVICE_INIT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A5H         PUBLIC        P1MDOUT
+  D:00A6H         PUBLIC        P2MDOUT
+  D:00A7H         PUBLIC        P3MDOUT
+  D:00AEH         PUBLIC        P4MDOUT
+  C:2436H         PUBLIC        Port_IO_Init
+  D:00D9H         PUBLIC        PCA0MD
+  C:24BDH         PUBLIC        Oscillator_Init
+  D:00E2H         PUBLIC        XBR1
+  D:00B2H         PUBLIC        OSCICN
+  C:248CH         PUBLIC        Device_Init
+  C:249EH         PUBLIC        PCA_Init
+  -------         PROC          PCA_INIT
+  C:249EH         LINE#         10
+  C:249EH         LINE#         11
+  C:249EH         LINE#         12
+  C:24A1H         LINE#         13
+  C:24A4H         LINE#         14
+  -------         ENDPROC       PCA_INIT
+  -------         PROC          PORT_IO_INIT
+  C:2436H         LINE#         37
+  C:2436H         LINE#         38
+  C:2436H         LINE#         75
+  C:2439H         LINE#         76
+  C:243CH         LINE#         77
+  C:243FH         LINE#         78
+  C:2442H         LINE#         79
+  C:2445H         LINE#         80
+  -------         ENDPROC       PORT_IO_INIT
+  -------         PROC          OSCILLATOR_INIT
+  C:24BDH         LINE#         82
+  C:24BDH         LINE#         83
+  C:24BDH         LINE#         90
+  C:24C0H         LINE#         91
+  -------         ENDPROC       OSCILLATOR_INIT
+  -------         PROC          DEVICE_INIT
+  C:248CH         LINE#         95
+  C:248CH         LINE#         96
+  C:248CH         LINE#         97
+  C:248FH         LINE#         101
+  C:2492H         LINE#         102
+  -------         ENDPROC       DEVICE_INIT
+  -------         ENDMOD        DEVICE_INIT
+
+  -------         MODULE        MY_FNC
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:2242H         PUBLIC        _SPI_DAC_Write
+  C:2309H         PUBLIC        _DACD
+  C:2456H         PUBLIC        _out_mux
+  C:23E7H         PUBLIC        _SPI_DDS_Write
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 8
+
+
+  B:00B0H.0       PUBLIC        SDIH
+  B:00B0H.1       PUBLIC        SCLK
+  B:00B0H.5       PUBLIC        DACOS_CSL
+  C:2495H         PUBLIC        timer_start
+  B:0088H.5       PUBLIC        TF0
+  C:1CB1H         PUBLIC        _freq_gen
+  D:008CH         PUBLIC        TH0
+  B:00B0H.4       PUBLIC        DACD_CSL
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  B:00B0H.2       PUBLIC        PG_CSL
+  C:2331H         PUBLIC        _DACOS
+  C:24A5H         PUBLIC        timectl
+  C:2446H         PUBLIC        _dev_mux
+  -------         PROC          TIMER_START
+  C:2495H         LINE#         15
+  C:2495H         LINE#         16
+  C:2495H         LINE#         17
+  C:2498H         LINE#         18
+  C:249BH         LINE#         19
+  C:249DH         LINE#         23
+  -------         ENDPROC       TIMER_START
+  -------         PROC          TIMECTL
+  C:24A5H         LINE#         25
+  C:24A5H         LINE#         26
+  C:24A5H         LINE#         27
+  C:24A8H         LINE#         28
+  C:24AAH         LINE#         29
+  -------         ENDPROC       TIMECTL
+  -------         PROC          _SPI_DDS_WRITE
+  D:0006H         SYMBOL        SPI_byte
+  -------         DO            
+  D:0005H         SYMBOL        SPI_count
+  -------         ENDDO         
+  C:23E7H         LINE#         31
+  C:23E7H         LINE#         32
+  C:23E7H         LINE#         34
+  C:23E9H         LINE#         35
+  C:23E9H         LINE#         36
+  C:23EBH         LINE#         37
+  C:23EFH         LINE#         38
+  C:23F6H         LINE#         39
+  C:23F8H         LINE#         40
+  C:23FDH         LINE#         41
+  -------         ENDPROC       _SPI_DDS_WRITE
+  -------         PROC          _FREQ_GEN
+  X:00B1H         SYMBOL        freqs
+  D:0004H         SYMBOL        addr
+  X:00B5H         SYMBOL        StatData
+  -------         DO            
+  X:00B8H         SYMBOL        F0RWM
+  D:0002H         SYMBOL        F0RWL
+  -------         ENDDO         
+  C:1CB1H         LINE#         43
+  C:1CBEH         LINE#         46
+  C:1CBEH         LINE#         48
+  C:1CE9H         LINE#         49
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 9
+
+
+  C:1CEFH         LINE#         51
+  C:1CF1H         LINE#         52
+  C:1CF8H         LINE#         53
+  C:1CFFH         LINE#         54
+  C:1D0AH         LINE#         55
+  C:1D11H         LINE#         56
+  C:1D18H         LINE#         57
+  C:1D1AH         LINE#         59
+  -------         ENDPROC       _FREQ_GEN
+  -------         PROC          _SPI_DAC_WRITE
+  X:00E5H         SYMBOL        SPI_2byte
+  -------         DO            
+  D:0002H         SYMBOL        SPI_count
+  -------         ENDDO         
+  C:2242H         LINE#         62
+  C:224AH         LINE#         63
+  C:224AH         LINE#         65
+  C:224DH         LINE#         66
+  C:224DH         LINE#         67
+  C:224FH         LINE#         68
+  C:225BH         LINE#         69
+  C:2268H         LINE#         70
+  C:226AH         LINE#         71
+  C:2275H         LINE#         72
+  -------         ENDPROC       _SPI_DAC_WRITE
+  -------         PROC          _DACD
+  D:0004H         SYMBOL        pr
+  X:00CAH         SYMBOL        StatData
+  C:2309H         LINE#         74
+  C:2318H         LINE#         75
+  C:2318H         LINE#         76
+  C:231AH         LINE#         77
+  C:231DH         LINE#         78
+  C:231FH         LINE#         79
+  -------         ENDPROC       _DACD
+  -------         PROC          _DACOS
+  D:0004H         SYMBOL        pr
+  X:00CDH         SYMBOL        StatData
+  C:2331H         LINE#         82
+  C:2340H         LINE#         83
+  C:2340H         LINE#         84
+  C:2342H         LINE#         85
+  C:2345H         LINE#         86
+  C:2347H         LINE#         87
+  -------         ENDPROC       _DACOS
+  -------         PROC          _DEV_MUX
+  D:0007H         SYMBOL        i
+  D:0001H         SYMBOL        StatData
+  C:2446H         LINE#         92
+  C:2446H         LINE#         93
+  C:2446H         LINE#         94
+  C:2449H         LINE#         95
+  -------         ENDPROC       _DEV_MUX
+  -------         PROC          _OUT_MUX
+  D:0007H         SYMBOL        i
+  D:0001H         SYMBOL        StatData
+  C:2456H         LINE#         98
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 10
+
+
+  C:2456H         LINE#         99
+  C:2456H         LINE#         100
+  C:2459H         LINE#         101
+  -------         ENDPROC       _OUT_MUX
+  -------         ENDMOD        MY_FNC
+
+  -------         MODULE        WIZCHIP_CONF
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:1F00H         PUBLIC        _reg_wizchip_cris_cbfunc
+  C:2481H         PUBLIC        wizchip_getnetmode
+  C:24D2H         PUBLIC        wizchip_cris_enter
+  C:2276H         PUBLIC        wizchip_getinterrupt
+  C:0B9DH         PUBLIC        _wizchip_init
+  C:1C37H         PUBLIC        _wizchip_clrinterrupt
+  C:161BH         PUBLIC        _wizchip_getnetinfo
+  C:24D4H         PUBLIC        wizchip_cs_select
+  X:007FH         PUBLIC        WIZCHIP
+  C:22A8H         PUBLIC        _wizchip_setnetmode
+  X:00A1H         SYMBOL        _DNS_
+  C:1D29H         PUBLIC        _reg_wizchip_bus_cbfunc
+  C:1D9FH         PUBLIC        _reg_wizchip_spi_cbfunc
+  C:16F0H         PUBLIC        _wizchip_setnetinfo
+  C:1F6FH         PUBLIC        _reg_wizchip_cs_cbfunc
+  C:2040H         PUBLIC        _wizchip_gettimeout
+  C:24D3H         PUBLIC        wizchip_cris_exit
+  C:21D0H         PUBLIC        wizphy_reset
+  C:20A0H         PUBLIC        _wizchip_settimeout
+  C:2381H         PUBLIC        wizphy_getphypmode
+  C:24B1H         SYMBOL        _?ix1000
+  C:044BH         PUBLIC        _ctlwizchip
+  C:22D9H         PUBLIC        wizchip_getinterruptmask
+  C:1FDEH         PUBLIC        _wizphy_setphypmode
+  C:2476H         PUBLIC        _wizchip_bus_readdata
+  C:1956H         PUBLIC        _wizphy_getphyconf
+  C:1AA2H         PUBLIC        _ctlnetwork
+  C:2359H         PUBLIC        _wizchip_setinterruptmask
+  C:144CH         PUBLIC        wizchip_sw_reset
+  C:23CAH         PUBLIC        wizphy_getphylink
+  C:1E8BH         PUBLIC        _wizphy_setphyconf
+  C:23A8H         PUBLIC        _wizchip_bus_writedata
+  C:1E15H         PUBLIC        _reg_wizchip_spiburst_cbfunc
+  X:00A5H         SYMBOL        _DHCP_
+  C:2412H         PUBLIC        _wizchip_spi_readburst
+  C:218DH         PUBLIC        _wizphy_getphystat
+  C:24C9H         PUBLIC        wizchip_spi_readbyte
+  C:24D5H         PUBLIC        wizchip_cs_deselect
+  C:2424H         PUBLIC        _wizchip_spi_writeburst
+  C:24ABH         PUBLIC        _wizchip_spi_writebyte
+  -------         PROC          WIZCHIP_CRIS_ENTER
+  C:24D2H         LINE#         67
+  -------         ENDPROC       WIZCHIP_CRIS_ENTER
+  -------         PROC          WIZCHIP_CRIS_EXIT
+  C:24D3H         LINE#         75
+  -------         ENDPROC       WIZCHIP_CRIS_EXIT
+  -------         PROC          WIZCHIP_CS_SELECT
+  C:24D4H         LINE#         83
+  -------         ENDPROC       WIZCHIP_CS_SELECT
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 11
+
+
+  -------         PROC          WIZCHIP_CS_DESELECT
+  C:24D5H         LINE#         91
+  -------         ENDPROC       WIZCHIP_CS_DESELECT
+  -------         PROC          _WIZCHIP_BUS_READDATA
+  D:0004H         SYMBOL        AddrSel
+  C:2476H         LINE#         100
+  -------         ENDPROC       _WIZCHIP_BUS_READDATA
+  -------         PROC          _WIZCHIP_BUS_WRITEDATA
+  X:004BH         SYMBOL        AddrSel
+  X:004FH         SYMBOL        wb
+  C:23A8H         LINE#         109
+  -------         ENDPROC       _WIZCHIP_BUS_WRITEDATA
+  -------         PROC          WIZCHIP_SPI_READBYTE
+  C:24C9H         LINE#         117
+  -------         ENDPROC       WIZCHIP_SPI_READBYTE
+  -------         PROC          _WIZCHIP_SPI_WRITEBYTE
+  X:005DH         SYMBOL        wb
+  C:24ABH         LINE#         125
+  -------         ENDPROC       _WIZCHIP_SPI_WRITEBYTE
+  -------         PROC          _WIZCHIP_SPI_READBURST
+  X:005DH         SYMBOL        pBuf
+  X:0060H         SYMBOL        len
+  C:2412H         LINE#         133
+  -------         ENDPROC       _WIZCHIP_SPI_READBURST
+  -------         PROC          _WIZCHIP_SPI_WRITEBURST
+  X:005DH         SYMBOL        pBuf
+  X:0060H         SYMBOL        len
+  C:2424H         LINE#         141
+  -------         ENDPROC       _WIZCHIP_SPI_WRITEBURST
+  -------         PROC          _REG_WIZCHIP_CRIS_CBFUNC
+  X:0057H         SYMBOL        cris_en
+  X:005AH         SYMBOL        cris_ex
+  C:1F00H         LINE#         193
+  C:1F0BH         LINE#         194
+  C:1F0BH         LINE#         195
+  C:1F29H         LINE#         196
+  C:1F29H         LINE#         197
+  C:1F37H         LINE#         198
+  C:1F43H         LINE#         199
+  C:1F44H         LINE#         201
+  C:1F44H         LINE#         202
+  C:1F59H         LINE#         203
+  C:1F6EH         LINE#         204
+  C:1F6EH         LINE#         205
+  -------         ENDPROC       _REG_WIZCHIP_CRIS_CBFUNC
+  -------         PROC          _REG_WIZCHIP_CS_CBFUNC
+  X:0057H         SYMBOL        cs_sel
+  X:005AH         SYMBOL        cs_desel
+  C:1F6FH         LINE#         207
+  C:1F7AH         LINE#         208
+  C:1F7AH         LINE#         209
+  C:1F98H         LINE#         210
+  C:1F98H         LINE#         211
+  C:1FA6H         LINE#         212
+  C:1FB2H         LINE#         213
+  C:1FB3H         LINE#         215
+  C:1FB3H         LINE#         216
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 12
+
+
+  C:1FC8H         LINE#         217
+  C:1FDDH         LINE#         218
+  C:1FDDH         LINE#         219
+  -------         ENDPROC       _REG_WIZCHIP_CS_CBFUNC
+  -------         PROC          _REG_WIZCHIP_BUS_CBFUNC
+  X:00BAH         SYMBOL        bus_rb
+  X:00BDH         SYMBOL        bus_wb
+  C:1D29H         LINE#         223
+  C:1D34H         LINE#         224
+  C:1D34H         LINE#         225
+  C:1D3BH         LINE#         239
+  C:1D59H         LINE#         240
+  C:1D59H         LINE#         241
+  C:1D67H         LINE#         242
+  C:1D73H         LINE#         243
+  C:1D74H         LINE#         245
+  C:1D74H         LINE#         246
+  C:1D89H         LINE#         247
+  C:1D9EH         LINE#         248
+  C:1D9EH         LINE#         249
+  -------         ENDPROC       _REG_WIZCHIP_BUS_CBFUNC
+  -------         PROC          _REG_WIZCHIP_SPI_CBFUNC
+  X:0057H         SYMBOL        spi_rb
+  X:005AH         SYMBOL        spi_wb
+  C:1D9FH         LINE#         251
+  C:1DAAH         LINE#         252
+  C:1DAAH         LINE#         253
+  C:1DB1H         LINE#         255
+  C:1DCFH         LINE#         256
+  C:1DCFH         LINE#         257
+  C:1DDDH         LINE#         258
+  C:1DE9H         LINE#         259
+  C:1DEAH         LINE#         261
+  C:1DEAH         LINE#         262
+  C:1DFFH         LINE#         263
+  C:1E14H         LINE#         264
+  C:1E14H         LINE#         265
+  -------         ENDPROC       _REG_WIZCHIP_SPI_CBFUNC
+  -------         PROC          _REG_WIZCHIP_SPIBURST_CBFUNC
+  X:0057H         SYMBOL        spi_rb
+  X:005AH         SYMBOL        spi_wb
+  C:1E15H         LINE#         268
+  C:1E20H         LINE#         269
+  C:1E20H         LINE#         270
+  C:1E27H         LINE#         272
+  C:1E45H         LINE#         273
+  C:1E45H         LINE#         274
+  C:1E53H         LINE#         275
+  C:1E5FH         LINE#         276
+  C:1E60H         LINE#         278
+  C:1E60H         LINE#         279
+  C:1E75H         LINE#         280
+  C:1E8AH         LINE#         281
+  C:1E8AH         LINE#         282
+  -------         ENDPROC       _REG_WIZCHIP_SPIBURST_CBFUNC
+  -------         PROC          _CTLWIZCHIP
+  X:00A6H         SYMBOL        cwtype
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 13
+
+
+  X:00A7H         SYMBOL        arg
+  -------         DO            
+  X:00AAH         SYMBOL        tmp
+  X:00ABH         SYMBOL        ptmp
+  -------         ENDDO         
+  C:044BH         LINE#         284
+  C:0459H         LINE#         285
+  C:0459H         LINE#         287
+  C:045CH         LINE#         289
+  C:046EH         LINE#         290
+  C:04B1H         LINE#         291
+  C:04B1H         LINE#         292
+  C:04B1H         LINE#         293
+  C:04B4H         LINE#         294
+  C:04B7H         LINE#         295
+  C:04B7H         LINE#         296
+  C:04C2H         LINE#         297
+  C:04C2H         LINE#         298
+  C:04D6H         LINE#         299
+  C:04E5H         LINE#         300
+  C:04E5H         LINE#         301
+  C:0508H         LINE#         302
+  C:0508H         LINE#         303
+  C:051CH         LINE#         304
+  C:051FH         LINE#         305
+  C:051FH         LINE#         306
+  C:0522H         LINE#         307
+  C:0524H         LINE#         308
+  C:0524H         LINE#         309
+  C:0538H         LINE#         310
+  C:053BH         LINE#         311
+  C:053BH         LINE#         312
+  C:054AH         LINE#         313
+  C:054CH         LINE#         317
+  C:054CH         LINE#         318
+  C:0588H         LINE#         319
+  C:058BH         LINE#         320
+  C:058BH         LINE#         321
+  C:05C2H         LINE#         322
+  C:05C5H         LINE#         324
+  C:05C5H         LINE#         325
+  C:05D9H         LINE#         326
+  C:05F0H         LINE#         327
+  C:05FAH         LINE#         328
+  C:0604H         LINE#         329
+  C:060EH         LINE#         330
+  C:0618H         LINE#         331
+  C:061FH         LINE#         332
+  C:0621H         LINE#         334
+  C:0621H         LINE#         335
+  C:0624H         LINE#         336
+  C:0626H         LINE#         337
+  C:0626H         LINE#         338
+  C:0634H         LINE#         339
+  C:0636H         LINE#         340
+  C:0636H         LINE#         341
+  C:0644H         LINE#         342
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 14
+
+
+  C:0646H         LINE#         343
+  C:0646H         LINE#         344
+  C:0646H         LINE#         345
+  C:0646H         LINE#         346
+  C:0658H         LINE#         349
+  C:0658H         LINE#         350
+  C:0660H         LINE#         351
+  C:0666H         LINE#         352
+  C:0666H         LINE#         353
+  C:0668H         LINE#         354
+  C:0668H         LINE#         355
+  C:0670H         LINE#         356
+  C:0676H         LINE#         357
+  C:068AH         LINE#         358
+  C:068CH         LINE#         360
+  C:068CH         LINE#         361
+  C:068FH         LINE#         362
+  C:068FH         LINE#         363
+  C:0691H         LINE#         364
+  -------         ENDPROC       _CTLWIZCHIP
+  -------         PROC          _CTLNETWORK
+  D:0007H         SYMBOL        cntype
+  X:00D0H         SYMBOL        arg
+  C:1AA2H         LINE#         367
+  C:1AADH         LINE#         368
+  C:1AADH         LINE#         370
+  C:1AC1H         LINE#         371
+  C:1AC1H         LINE#         372
+  C:1AC1H         LINE#         373
+  C:1ACFH         LINE#         374
+  C:1AD1H         LINE#         375
+  C:1AD1H         LINE#         376
+  C:1ADFH         LINE#         377
+  C:1AE1H         LINE#         378
+  C:1AE1H         LINE#         379
+  C:1AF3H         LINE#         380
+  C:1AF3H         LINE#         381
+  C:1B05H         LINE#         382
+  C:1B07H         LINE#         383
+  C:1B07H         LINE#         384
+  C:1B15H         LINE#         385
+  C:1B17H         LINE#         386
+  C:1B17H         LINE#         387
+  C:1B25H         LINE#         388
+  C:1B27H         LINE#         389
+  C:1B27H         LINE#         390
+  C:1B2AH         LINE#         391
+  C:1B2AH         LINE#         392
+  C:1B2CH         LINE#         393
+  -------         ENDPROC       _CTLNETWORK
+  -------         PROC          WIZCHIP_SW_RESET
+  -------         DO            
+  X:005FH         SYMBOL        gw
+  X:0063H         SYMBOL        sn
+  X:0067H         SYMBOL        sip
+  X:006BH         SYMBOL        mac
+  -------         ENDDO         
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 15
+
+
+  C:144CH         LINE#         395
+  C:144CH         LINE#         396
+  C:144CH         LINE#         405
+  C:1466H         LINE#         406
+  C:14B4H         LINE#         407
+  C:14C5H         LINE#         408
+  C:14D0H         LINE#         414
+  C:14EAH         LINE#         415
+  C:1504H         LINE#         416
+  C:151EH         LINE#         417
+  -------         ENDPROC       WIZCHIP_SW_RESET
+  -------         PROC          _WIZCHIP_INIT
+  X:0057H         SYMBOL        txsize
+  X:005AH         SYMBOL        rxsize
+  -------         DO            
+  X:005DH         SYMBOL        i
+  X:005EH         SYMBOL        tmp
+  -------         ENDDO         
+  C:0B9DH         LINE#         420
+  C:0BA8H         LINE#         421
+  C:0BA8H         LINE#         426
+  C:0BADH         LINE#         427
+  C:0BB0H         LINE#         428
+  C:0BC3H         LINE#         429
+  C:0BC3H         LINE#         430
+  C:0BC8H         LINE#         441
+  C:0BD8H         LINE#         442
+  C:0BD8H         LINE#         443
+  C:0BF5H         LINE#         448
+  C:0C00H         LINE#         450
+  C:0C08H         LINE#         452
+  C:0C19H         LINE#         453
+  C:0C19H         LINE#         459
+  C:0C69H         LINE#         461
+  C:0C71H         LINE#         462
+  C:0C71H         LINE#         464
+  C:0C84H         LINE#         465
+  C:0C84H         LINE#         466
+  C:0C89H         LINE#         476
+  C:0C99H         LINE#         477
+  C:0C99H         LINE#         478
+  C:0CB6H         LINE#         482
+  C:0CC1H         LINE#         484
+  C:0CC9H         LINE#         486
+  C:0CDAH         LINE#         487
+  C:0CDAH         LINE#         493
+  C:0D28H         LINE#         495
+  C:0D30H         LINE#         496
+  C:0D30H         LINE#         497
+  C:0D32H         LINE#         498
+  -------         ENDPROC       _WIZCHIP_INIT
+  -------         PROC          _WIZCHIP_CLRINTERRUPT
+  D:0006H         SYMBOL        intr
+  -------         DO            
+  X:00E7H         SYMBOL        ir
+  X:00E8H         SYMBOL        sir
+  -------         ENDDO         
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 16
+
+
+  C:1C37H         LINE#         500
+  C:1C37H         LINE#         501
+  C:1C37H         LINE#         502
+  C:1C3EH         LINE#         503
+  C:1C41H         LINE#         522
+  C:1C53H         LINE#         525
+  C:1C62H         LINE#         526
+  C:1CA8H         LINE#         527
+  C:1CB0H         LINE#         530
+  -------         ENDPROC       _WIZCHIP_CLRINTERRUPT
+  -------         PROC          WIZCHIP_GETINTERRUPT
+  -------         DO            
+  X:00E9H         SYMBOL        ir
+  D:0007H         SYMBOL        sir
+  D:0004H         SYMBOL        ret
+  -------         ENDDO         
+  C:2276H         LINE#         532
+  C:2276H         LINE#         533
+  C:2276H         LINE#         534
+  C:227BH         LINE#         535
+  C:227CH         LINE#         536
+  C:227EH         LINE#         546
+  C:228AH         LINE#         547
+  C:2295H         LINE#         558
+  C:2299H         LINE#         559
+  C:22A4H         LINE#         560
+  C:22A7H         LINE#         561
+  -------         ENDPROC       WIZCHIP_GETINTERRUPT
+  -------         PROC          _WIZCHIP_SETINTERRUPTMASK
+  D:0006H         SYMBOL        intr
+  -------         DO            
+  D:0005H         SYMBOL        imr
+  X:00EAH         SYMBOL        simr
+  -------         ENDDO         
+  C:2359H         LINE#         563
+  C:2359H         LINE#         564
+  C:2359H         LINE#         565
+  C:2359H         LINE#         566
+  C:235EH         LINE#         582
+  C:236EH         LINE#         583
+  -------         ENDPROC       _WIZCHIP_SETINTERRUPTMASK
+  -------         PROC          WIZCHIP_GETINTERRUPTMASK
+  -------         DO            
+  X:00EBH         SYMBOL        imr
+  D:0007H         SYMBOL        simr
+  D:0004H         SYMBOL        ret
+  -------         ENDDO         
+  C:22D9H         LINE#         587
+  C:22D9H         LINE#         588
+  C:22D9H         LINE#         589
+  C:22DEH         LINE#         590
+  C:22DFH         LINE#         591
+  C:22E1H         LINE#         601
+  C:22EBH         LINE#         602
+  C:22F6H         LINE#         611
+  C:22FAH         LINE#         612
+  C:2305H         LINE#         613
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 17
+
+
+  C:2308H         LINE#         614
+  -------         ENDPROC       WIZCHIP_GETINTERRUPTMASK
+  -------         PROC          WIZPHY_GETPHYLINK
+  -------         DO            
+  X:00ECH         SYMBOL        tmp
+  -------         ENDDO         
+  C:23CAH         LINE#         616
+  C:23CAH         LINE#         617
+  C:23CAH         LINE#         618
+  C:23CFH         LINE#         626
+  C:23DBH         LINE#         627
+  C:23E1H         LINE#         632
+  C:23E6H         LINE#         633
+  -------         ENDPROC       WIZPHY_GETPHYLINK
+  -------         PROC          WIZPHY_GETPHYPMODE
+  -------         DO            
+  X:00EDH         SYMBOL        tmp
+  -------         ENDDO         
+  C:2381H         LINE#         637
+  C:2381H         LINE#         638
+  C:2381H         LINE#         639
+  C:2386H         LINE#         646
+  C:2395H         LINE#         647
+  C:239DH         LINE#         649
+  C:23A2H         LINE#         653
+  C:23A7H         LINE#         654
+  -------         ENDPROC       WIZPHY_GETPHYPMODE
+  -------         PROC          WIZPHY_RESET
+  -------         DO            
+  D:0007H         SYMBOL        tmp
+  -------         ENDDO         
+  C:21D0H         LINE#         740
+  C:21D0H         LINE#         741
+  C:21D0H         LINE#         742
+  C:21DBH         LINE#         743
+  C:21DEH         LINE#         744
+  C:21EDH         LINE#         745
+  C:21F8H         LINE#         746
+  C:21FBH         LINE#         747
+  -------         ENDPROC       WIZPHY_RESET
+  -------         PROC          _WIZPHY_SETPHYCONF
+  D:0001H         SYMBOL        phyconf
+  -------         DO            
+  X:00EEH         SYMBOL        tmp
+  -------         ENDDO         
+  C:1E8BH         LINE#         750
+  C:1E8BH         LINE#         751
+  C:1E8BH         LINE#         752
+  C:1E90H         LINE#         753
+  C:1E99H         LINE#         754
+  C:1E9FH         LINE#         756
+  C:1EA3H         LINE#         757
+  C:1EACH         LINE#         758
+  C:1EB5H         LINE#         760
+  C:1EB5H         LINE#         761
+  C:1EBEH         LINE#         762
+  C:1EBEH         LINE#         763
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 18
+
+
+  C:1ECAH         LINE#         764
+  C:1ED0H         LINE#         766
+  C:1ED4H         LINE#         767
+  C:1ED6H         LINE#         769
+  C:1ED6H         LINE#         770
+  C:1EE2H         LINE#         771
+  C:1EE8H         LINE#         773
+  C:1EEAH         LINE#         774
+  C:1EEAH         LINE#         775
+  C:1EEAH         LINE#         776
+  C:1EFDH         LINE#         777
+  -------         ENDPROC       _WIZPHY_SETPHYCONF
+  -------         PROC          _WIZPHY_GETPHYCONF
+  X:00D3H         SYMBOL        phyconf
+  -------         DO            
+  D:0007H         SYMBOL        tmp
+  -------         ENDDO         
+  C:1956H         LINE#         780
+  C:1961H         LINE#         781
+  C:1961H         LINE#         782
+  C:1963H         LINE#         783
+  C:196AH         LINE#         784
+  C:1983H         LINE#         785
+  C:198FH         LINE#         786
+  C:198FH         LINE#         787
+  C:198FH         LINE#         788
+  C:198FH         LINE#         789
+  C:199FH         LINE#         790
+  C:19A1H         LINE#         791
+  C:19A1H         LINE#         792
+  C:19B3H         LINE#         793
+  C:19B3H         LINE#         794
+  C:19B3H         LINE#         795
+  C:19C0H         LINE#         796
+  C:19C0H         LINE#         797
+  C:19C0H         LINE#         798
+  C:19C0H         LINE#         799
+  C:19C0H         LINE#         800
+  C:19D0H         LINE#         801
+  C:19D2H         LINE#         802
+  C:19D2H         LINE#         803
+  C:19E4H         LINE#         804
+  C:19E4H         LINE#         805
+  C:19E4H         LINE#         806
+  C:19F1H         LINE#         807
+  C:19F1H         LINE#         808
+  C:19F1H         LINE#         809
+  C:19F1H         LINE#         810
+  C:19F1H         LINE#         811
+  C:1A01H         LINE#         812
+  C:1A03H         LINE#         813
+  C:1A03H         LINE#         814
+  C:1A15H         LINE#         815
+  C:1A15H         LINE#         816
+  C:1A15H         LINE#         817
+  -------         ENDPROC       _WIZPHY_GETPHYCONF
+  -------         PROC          _WIZPHY_GETPHYSTAT
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 19
+
+
+  X:00D6H         SYMBOL        phyconf
+  -------         DO            
+  D:0007H         SYMBOL        tmp
+  -------         ENDDO         
+  C:218DH         LINE#         819
+  C:2198H         LINE#         820
+  C:2198H         LINE#         821
+  C:21A3H         LINE#         822
+  C:21BFH         LINE#         823
+  -------         ENDPROC       _WIZPHY_GETPHYSTAT
+  -------         PROC          _WIZPHY_SETPHYPMODE
+  X:00EFH         SYMBOL        pmode
+  -------         DO            
+  D:0007H         SYMBOL        tmp
+  -------         ENDDO         
+  C:1FDEH         LINE#         826
+  C:1FE3H         LINE#         827
+  C:1FE3H         LINE#         828
+  C:1FE5H         LINE#         829
+  C:1FECH         LINE#         830
+  C:1FF3H         LINE#         831
+  C:1FF7H         LINE#         832
+  C:1FFEH         LINE#         833
+  C:2004H         LINE#         835
+  C:2008H         LINE#         836
+  C:2018H         LINE#         837
+  C:201BH         LINE#         838
+  C:2026H         LINE#         839
+  C:202DH         LINE#         840
+  C:202DH         LINE#         841
+  C:2035H         LINE#         842
+  C:2035H         LINE#         844
+  C:2035H         LINE#         845
+  C:203DH         LINE#         846
+  C:203DH         LINE#         847
+  C:203FH         LINE#         848
+  -------         ENDPROC       _WIZPHY_SETPHYPMODE
+  -------         PROC          _WIZCHIP_SETNETINFO
+  X:00D9H         SYMBOL        pnetinfo
+  C:16F0H         LINE#         852
+  C:16FBH         LINE#         853
+  C:16FBH         LINE#         854
+  C:171AH         LINE#         855
+  C:173EH         LINE#         856
+  C:1762H         LINE#         857
+  C:1786H         LINE#         858
+  C:179BH         LINE#         859
+  C:17A5H         LINE#         860
+  C:17AFH         LINE#         861
+  C:17B9H         LINE#         862
+  C:17C3H         LINE#         863
+  -------         ENDPROC       _WIZCHIP_SETNETINFO
+  -------         PROC          _WIZCHIP_GETNETINFO
+  X:00DCH         SYMBOL        pnetinfo
+  C:161BH         LINE#         865
+  C:1626H         LINE#         866
+  C:1626H         LINE#         867
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 20
+
+
+  C:1645H         LINE#         868
+  C:1669H         LINE#         869
+  C:168DH         LINE#         870
+  C:16B1H         LINE#         871
+  C:16C8H         LINE#         872
+  C:16D2H         LINE#         873
+  C:16DCH         LINE#         874
+  C:16E6H         LINE#         875
+  -------         ENDPROC       _WIZCHIP_GETNETINFO
+  -------         PROC          _WIZCHIP_SETNETMODE
+  X:00F0H         SYMBOL        netmode
+  -------         DO            
+  D:0006H         SYMBOL        tmp
+  -------         ENDDO         
+  C:22A8H         LINE#         878
+  C:22ADH         LINE#         879
+  C:22ADH         LINE#         880
+  C:22ADH         LINE#         884
+  C:22B5H         LINE#         886
+  C:22C2H         LINE#         887
+  C:22C7H         LINE#         888
+  C:22D6H         LINE#         889
+  C:22D8H         LINE#         890
+  -------         ENDPROC       _WIZCHIP_SETNETMODE
+  -------         PROC          WIZCHIP_GETNETMODE
+  C:2481H         LINE#         892
+  C:2481H         LINE#         893
+  C:2481H         LINE#         894
+  -------         ENDPROC       WIZCHIP_GETNETMODE
+  -------         PROC          _WIZCHIP_SETTIMEOUT
+  X:00DFH         SYMBOL        nettime
+  C:20A0H         LINE#         897
+  C:20ABH         LINE#         898
+  C:20ABH         LINE#         899
+  C:20BDH         LINE#         900
+  -------         ENDPROC       _WIZCHIP_SETTIMEOUT
+  -------         PROC          _WIZCHIP_GETTIMEOUT
+  X:00E2H         SYMBOL        nettime
+  C:2040H         LINE#         903
+  C:204BH         LINE#         904
+  C:204BH         LINE#         905
+  C:2065H         LINE#         906
+  -------         ENDPROC       _WIZCHIP_GETTIMEOUT
+  -------         ENDMOD        WIZCHIP_CONF
+
+  -------         MODULE        W5500
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:1140H         PUBLIC        _WIZCHIP_WRITE
+  C:0FF9H         PUBLIC        _WIZCHIP_READ
+  C:0A03H         PUBLIC        _WIZCHIP_WRITE_BUF
+  C:17C4H         PUBLIC        _wiz_recv_ignore
+  C:1538H         PUBLIC        _getSn_TX_FSR
+  C:085AH         PUBLIC        _WIZCHIP_READ_BUF
+  C:0D33H         PUBLIC        _wiz_send_data
+  C:135DH         PUBLIC        _getSn_RX_RSR
+  C:0E96H         PUBLIC        _wiz_recv_data
+  C:0FF5H         SYMBOL        L?0067
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 21
+
+
+  -------         PROC          L?0066
+  -------         ENDPROC       L?0066
+  C:0FF5H         SYMBOL        L?0067
+  -------         PROC          _WIZCHIP_READ
+  X:0071H         SYMBOL        AddrSel
+  -------         DO            
+  X:0075H         SYMBOL        ret
+  X:0076H         SYMBOL        spi_data
+  -------         ENDDO         
+  C:0FF9H         LINE#         66
+  C:0FFFH         LINE#         67
+  C:0FFFH         LINE#         71
+  C:100BH         LINE#         72
+  C:1017H         LINE#         74
+  C:102CH         LINE#         76
+  C:104AH         LINE#         77
+  C:104AH         LINE#         78
+  C:106BH         LINE#         79
+  C:108CH         LINE#         80
+  C:10A6H         LINE#         81
+  C:10A8H         LINE#         83
+  C:10A8H         LINE#         84
+  C:10BFH         LINE#         85
+  C:10D6H         LINE#         86
+  C:10E5H         LINE#         87
+  C:1102H         LINE#         88
+  C:1102H         LINE#         89
+  C:1113H         LINE#         91
+  C:111FH         LINE#         92
+  C:112BH         LINE#         93
+  C:1130H         LINE#         94
+  -------         ENDPROC       _WIZCHIP_READ
+  C:113BH         SYMBOL        L?0069
+  -------         PROC          L?0068
+  -------         ENDPROC       L?0068
+  C:113BH         SYMBOL        L?0069
+  -------         PROC          _WIZCHIP_WRITE
+  X:0071H         SYMBOL        AddrSel
+  X:0075H         SYMBOL        wb
+  -------         DO            
+  X:0076H         SYMBOL        spi_data
+  -------         ENDDO         
+  C:1140H         LINE#         96
+  C:1146H         LINE#         97
+  C:1146H         LINE#         100
+  C:1152H         LINE#         101
+  C:115EH         LINE#         103
+  C:1175H         LINE#         106
+  C:1188H         LINE#         107
+  C:1188H         LINE#         108
+  C:11A6H         LINE#         109
+  C:11C7H         LINE#         110
+  C:11E4H         LINE#         111
+  C:11F5H         LINE#         112
+  C:11F7H         LINE#         114
+  C:11F7H         LINE#         115
+  C:120BH         LINE#         116
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 22
+
+
+  C:1222H         LINE#         117
+  C:1231H         LINE#         118
+  C:1239H         LINE#         119
+  C:1256H         LINE#         120
+  C:1256H         LINE#         122
+  C:1262H         LINE#         123
+  -------         ENDPROC       _WIZCHIP_WRITE
+  -------         PROC          _WIZCHIP_READ_BUF
+  X:0071H         SYMBOL        AddrSel
+  X:0075H         SYMBOL        pBuf
+  X:0078H         SYMBOL        len
+  -------         DO            
+  X:007AH         SYMBOL        spi_data
+  X:007DH         SYMBOL        i
+  -------         ENDDO         
+  C:085AH         LINE#         126
+  C:086BH         LINE#         127
+  C:086BH         LINE#         131
+  C:0877H         LINE#         132
+  C:0883H         LINE#         134
+  C:0898H         LINE#         136
+  C:08B9H         LINE#         137
+  C:08B9H         LINE#         138
+  C:08DAH         LINE#         139
+  C:08FBH         LINE#         140
+  C:0918H         LINE#         141
+  C:0937H         LINE#         142
+  C:096DH         LINE#         143
+  C:096DH         LINE#         145
+  C:096DH         LINE#         146
+  C:0984H         LINE#         147
+  C:099BH         LINE#         148
+  C:09AAH         LINE#         149
+  C:09C7H         LINE#         150
+  C:09EBH         LINE#         151
+  C:09EBH         LINE#         153
+  C:09F7H         LINE#         154
+  -------         ENDPROC       _WIZCHIP_READ_BUF
+  -------         PROC          _WIZCHIP_WRITE_BUF
+  X:0071H         SYMBOL        AddrSel
+  X:0075H         SYMBOL        pBuf
+  X:0078H         SYMBOL        len
+  -------         DO            
+  X:007AH         SYMBOL        spi_data
+  X:007DH         SYMBOL        i
+  -------         ENDDO         
+  C:0A03H         LINE#         157
+  C:0A14H         LINE#         158
+  C:0A14H         LINE#         162
+  C:0A20H         LINE#         163
+  C:0A2CH         LINE#         165
+  C:0A43H         LINE#         167
+  C:0A56H         LINE#         168
+  C:0A56H         LINE#         169
+  C:0A77H         LINE#         170
+  C:0A98H         LINE#         171
+  C:0AB5H         LINE#         172
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 23
+
+
+  C:0AD5H         LINE#         173
+  C:0B07H         LINE#         174
+  C:0B07H         LINE#         176
+  C:0B07H         LINE#         177
+  C:0B1EH         LINE#         178
+  C:0B35H         LINE#         179
+  C:0B44H         LINE#         180
+  C:0B61H         LINE#         181
+  C:0B85H         LINE#         182
+  C:0B85H         LINE#         184
+  C:0B91H         LINE#         185
+  -------         ENDPROC       _WIZCHIP_WRITE_BUF
+  -------         PROC          _GETSN_TX_FSR
+  X:00C0H         SYMBOL        sn
+  -------         DO            
+  X:00C1H         SYMBOL        val
+  X:00C3H         SYMBOL        val1
+  -------         ENDDO         
+  C:1538H         LINE#         189
+  C:153DH         LINE#         190
+  C:153DH         LINE#         191
+  C:1546H         LINE#         194
+  C:1546H         LINE#         195
+  C:156AH         LINE#         196
+  C:15A2H         LINE#         197
+  C:15A5H         LINE#         198
+  C:15A5H         LINE#         199
+  C:15C9H         LINE#         200
+  C:1600H         LINE#         201
+  C:1600H         LINE#         202
+  C:161AH         LINE#         203
+  C:161AH         LINE#         204
+  -------         ENDPROC       _GETSN_TX_FSR
+  -------         PROC          _GETSN_RX_RSR
+  X:004EH         SYMBOL        sn
+  -------         DO            
+  X:004FH         SYMBOL        val
+  X:0051H         SYMBOL        val1
+  -------         ENDDO         
+  C:135DH         LINE#         207
+  C:1362H         LINE#         208
+  C:1362H         LINE#         209
+  C:136BH         LINE#         212
+  C:136BH         LINE#         213
+  C:1395H         LINE#         214
+  C:13CDH         LINE#         215
+  C:13D0H         LINE#         216
+  C:13D0H         LINE#         217
+  C:13FAH         LINE#         218
+  C:1431H         LINE#         219
+  C:1431H         LINE#         220
+  C:144BH         LINE#         221
+  C:144BH         LINE#         222
+  -------         ENDPROC       _GETSN_RX_RSR
+  -------         PROC          _WIZ_SEND_DATA
+  X:004EH         SYMBOL        sn
+  X:004FH         SYMBOL        wizdata
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 24
+
+
+  X:0052H         SYMBOL        len
+  -------         DO            
+  X:0054H         SYMBOL        ptr
+  X:0056H         SYMBOL        addrsel
+  -------         ENDDO         
+  C:0D33H         LINE#         224
+  C:0D41H         LINE#         225
+  C:0D41H         LINE#         226
+  C:0D48H         LINE#         227
+  C:0D50H         LINE#         229
+  C:0D5DH         LINE#         230
+  C:0DBBH         LINE#         233
+  C:0E05H         LINE#         235
+  C:0E2EH         LINE#         237
+  C:0E42H         LINE#         238
+  C:0E95H         LINE#         239
+  -------         ENDPROC       _WIZ_SEND_DATA
+  -------         PROC          _WIZ_RECV_DATA
+  X:004EH         SYMBOL        sn
+  X:004FH         SYMBOL        wizdata
+  X:0052H         SYMBOL        len
+  -------         DO            
+  X:0054H         SYMBOL        ptr
+  X:0056H         SYMBOL        addrsel
+  -------         ENDDO         
+  C:0E96H         LINE#         241
+  C:0EA4H         LINE#         242
+  C:0EA4H         LINE#         243
+  C:0EABH         LINE#         244
+  C:0EB3H         LINE#         246
+  C:0EC0H         LINE#         247
+  C:0F1EH         LINE#         250
+  C:0F68H         LINE#         252
+  C:0F91H         LINE#         253
+  C:0FA5H         LINE#         255
+  C:0FEEH         LINE#         256
+  -------         ENDPROC       _WIZ_RECV_DATA
+  -------         PROC          _WIZ_RECV_IGNORE
+  X:00C5H         SYMBOL        sn
+  X:00C6H         SYMBOL        len
+  -------         DO            
+  X:00C8H         SYMBOL        ptr
+  -------         ENDDO         
+  C:17C4H         LINE#         259
+  C:17CFH         LINE#         260
+  C:17CFH         LINE#         261
+  C:17D4H         LINE#         263
+  C:1831H         LINE#         264
+  C:1845H         LINE#         265
+  -------         ENDPROC       _WIZ_RECV_IGNORE
+  -------         ENDMOD        W5500
+
+  -------         MODULE        ?C_STARTUP
+  C:1A16H         SEGMENT       ?C_C51STARTUP
+  I:0008H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 25
+
+
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:1A19H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:1A16H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:1A16H         LINE#         133
+  C:1A18H         LINE#         134
+  C:1A19H         LINE#         135
+  C:1A1AH         LINE#         136
+  C:1A1CH         LINE#         185
+  C:1A1FH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        MY_WIZNET
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:24CFH         PUBLIC        my_cs_desel
+  C:246AH         PUBLIC        _delay
+  C:24C1H         PUBLIC        my_cris_en
+  C:24C5H         PUBLIC        my_cris_ex
+  B:0090H.4       PUBLIC        MOSI
+  B:0090H.7       PUBLIC        MISO
+  C:2146H         PUBLIC        _read_buf
+  C:24B7H         SYMBOL        _?ix1000
+  C:24CCH         PUBLIC        my_cs_sel
+  C:20FFH         PUBLIC        my_spi_rb
+  C:220AH         PUBLIC        _write_buf
+  C:23FEH         PUBLIC        _my_spi_wb
+  C:0692H         PUBLIC        _passADDR
+  B:0090H.5       PUBLIC        CLK
+  C:1893H         PUBLIC        _wiz_init
+  B:00B0H.3       PUBLIC        NSS
+  C:2466H         SYMBOL        L?0037
+  -------         PROC          L?0036
+  -------         ENDPROC       L?0036
+  C:2466H         SYMBOL        L?0037
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        i1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 26
+
+
+  C:246AH         LINE#         8
+  C:246AH         LINE#         9
+  C:246AH         LINE#         10
+  C:2475H         LINE#         11
+  -------         ENDPROC       _DELAY
+  -------         PROC          MY_CS_SEL
+  C:24CCH         LINE#         13
+  C:24CCH         LINE#         14
+  C:24CCH         LINE#         15
+  C:24CEH         LINE#         16
+  -------         ENDPROC       MY_CS_SEL
+  -------         PROC          MY_CS_DESEL
+  C:24CFH         LINE#         18
+  C:24CFH         LINE#         19
+  C:24CFH         LINE#         20
+  C:24D1H         LINE#         21
+  -------         ENDPROC       MY_CS_DESEL
+  -------         PROC          MY_SPI_RB
+  -------         DO            
+  D:0005H         SYMBOL        cnt
+  X:005DH         SYMBOL        d
+  -------         ENDDO         
+  C:20FFH         LINE#         23
+  C:20FFH         LINE#         24
+  C:20FFH         LINE#         26
+  C:2106H         LINE#         27
+  C:2107H         LINE#         28
+  C:2107H         LINE#         29
+  C:2109H         LINE#         30
+  C:2117H         LINE#         31
+  C:2121H         LINE#         32
+  C:2123H         LINE#         33
+  C:2128H         LINE#         35
+  C:213BH         LINE#         36
+  C:2145H         LINE#         37
+  C:2145H         LINE#         38
+  -------         ENDPROC       MY_SPI_RB
+  -------         PROC          _MY_SPI_WB
+  D:0007H         SYMBOL        d
+  -------         DO            
+  D:0006H         SYMBOL        cnt
+  -------         ENDDO         
+  C:23FEH         LINE#         40
+  C:23FEH         LINE#         41
+  C:23FEH         LINE#         43
+  C:2400H         LINE#         44
+  C:2400H         LINE#         45
+  C:2402H         LINE#         46
+  C:2406H         LINE#         47
+  C:240AH         LINE#         48
+  C:240CH         LINE#         49
+  C:2411H         LINE#         50
+  -------         ENDPROC       _MY_SPI_WB
+  -------         PROC          MY_CRIS_EN
+  C:24C1H         LINE#         52
+  C:24C1H         LINE#         53
+  C:24C1H         LINE#         54
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 27
+
+
+  C:24C4H         LINE#         55
+  -------         ENDPROC       MY_CRIS_EN
+  -------         PROC          MY_CRIS_EX
+  C:24C5H         LINE#         57
+  C:24C5H         LINE#         58
+  C:24C5H         LINE#         59
+  C:24C8H         LINE#         60
+  -------         ENDPROC       MY_CRIS_EX
+  -------         PROC          _READ_BUF
+  X:0057H         SYMBOL        pBuf
+  X:005AH         SYMBOL        len
+  -------         DO            
+  X:005CH         SYMBOL        cnt
+  -------         ENDDO         
+  C:2146H         LINE#         62
+  C:2157H         LINE#         63
+  C:2157H         LINE#         65
+  C:216DH         LINE#         66
+  C:216DH         LINE#         67
+  C:2184H         LINE#         68
+  C:218CH         LINE#         69
+  -------         ENDPROC       _READ_BUF
+  -------         PROC          _WRITE_BUF
+  X:0057H         SYMBOL        pBuf
+  D:0004H         SYMBOL        len
+  -------         DO            
+  X:005AH         SYMBOL        cnt
+  -------         ENDDO         
+  C:220AH         LINE#         71
+  C:2215H         LINE#         72
+  C:2215H         LINE#         74
+  C:2222H         LINE#         75
+  C:2222H         LINE#         76
+  C:2239H         LINE#         77
+  C:2241H         LINE#         78
+  -------         ENDPROC       _WRITE_BUF
+  -------         PROC          _PASSADDR
+  X:0057H         SYMBOL        gw
+  X:005AH         SYMBOL        mask
+  X:005DH         SYMBOL        mac
+  X:0060H         SYMBOL        ipadr
+  -------         DO            
+  X:0063H         SYMBOL        tmp
+  X:0069H         SYMBOL        check_gw
+  X:006AH         SYMBOL        check_mask
+  X:006BH         SYMBOL        check_mac
+  D:0007H         SYMBOL        check_ip
+  -------         ENDDO         
+  C:0692H         LINE#         80
+  C:069DH         LINE#         81
+  C:069DH         LINE#         82
+  C:06B0H         LINE#         88
+  C:06CFH         LINE#         89
+  C:06D2H         LINE#         90
+  C:06F1H         LINE#         91
+  C:06F4H         LINE#         92
+  C:0713H         LINE#         93
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 28
+
+
+  C:0716H         LINE#         94
+  C:0735H         LINE#         95
+  C:0738H         LINE#         98
+  C:0752H         LINE#         99
+  C:077CH         LINE#         100
+  C:0796H         LINE#         101
+  C:07C0H         LINE#         102
+  C:07DAH         LINE#         103
+  C:0804H         LINE#         104
+  C:081EH         LINE#         105
+  C:0843H         LINE#         106
+  C:0857H         LINE#         107
+  C:0859H         LINE#         108
+  -------         ENDPROC       _PASSADDR
+  -------         PROC          _WIZ_INIT
+  X:004BH         SYMBOL        gw
+  X:004EH         SYMBOL        mask
+  X:0051H         SYMBOL        mac
+  X:0054H         SYMBOL        ipadr
+  C:1893H         LINE#         111
+  C:189EH         LINE#         112
+  C:189EH         LINE#         113
+  C:18B5H         LINE#         114
+  C:18CCH         LINE#         115
+  C:18E3H         LINE#         116
+  C:18FAH         LINE#         117
+  C:1909H         LINE#         119
+  -------         ENDPROC       _WIZ_INIT
+  -------         ENDMOD        MY_WIZNET
+
+  -------         MODULE        ?C?COPY
+  C:00D3H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+  -------         MODULE        ?C?CLDPTR
+  C:00F9H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CLDOPTR
+  C:0112H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+  -------         MODULE        ?C?CSTPTR
+  C:013FH         PUBLIC        ?C?CSTPTR
+  -------         ENDMOD        ?C?CSTPTR
+
+  -------         MODULE        ?C?CSTOPTR
+  C:0151H         PUBLIC        ?C?CSTOPTR
+  -------         ENDMOD        ?C?CSTOPTR
+
+  -------         MODULE        ?C?ILDIX
+  C:0173H         PUBLIC        ?C?ILDIX
+  -------         ENDMOD        ?C?ILDIX
+
+  -------         MODULE        ?C?ILDPTR
+  C:0189H         PUBLIC        ?C?ILDPTR
+  -------         ENDMOD        ?C?ILDPTR
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 29
+
+
+
+  -------         MODULE        ?C?ILDOPTR
+  C:01B4H         PUBLIC        ?C?ILDOPTR
+  -------         ENDMOD        ?C?ILDOPTR
+
+  -------         MODULE        ?C?ISTPTR
+  C:01ECH         PUBLIC        ?C?ISTPTR
+  -------         ENDMOD        ?C?ISTPTR
+
+  -------         MODULE        ?C?ISTOPTR
+  C:020BH         PUBLIC        ?C?ISTOPTR
+  -------         ENDMOD        ?C?ISTOPTR
+
+  -------         MODULE        ?C?ULSHR
+  C:0238H         PUBLIC        ?C?ULSHR
+  -------         ENDMOD        ?C?ULSHR
+
+  -------         MODULE        ?C?LSHL
+  C:024BH         PUBLIC        ?C?LSHL
+  -------         ENDMOD        ?C?LSHL
+
+  -------         MODULE        ?C?LSTXDATA
+  C:025EH         PUBLIC        ?C?LSTXDATA
+  -------         ENDMOD        ?C?LSTXDATA
+
+  -------         MODULE        ?C?LSTKXDATA
+  C:026AH         PUBLIC        ?C?LSTKXDATA
+  -------         ENDMOD        ?C?LSTKXDATA
+
+  -------         MODULE        ?C?ICALL
+  C:029BH         PUBLIC        ?C?ICALL
+  C:029FH         PUBLIC        ?C?ICALL2
+  -------         ENDMOD        ?C?ICALL
+
+  -------         MODULE        ?C?MEMCMP
+  C:0427H         PUBLIC        ?C?MEMCMP
+  -------         ENDMOD        ?C?MEMCMP
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_FREQ_GEN?MY_FNC
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DACD?MY_FNC
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DACOS?MY_FNC
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DEV_MUX?MY_FNC
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_MUX?MY_FNC
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_REG_WIZCHIP_BUS_CBFUNC?WIZCHIP_CONF
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  05/29/2023  20:18:32  PAGE 30
+
+
+    SEGMENT: ?PR?_CTLWIZCHIP?WIZCHIP_CONF
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CTLNETWORK?WIZCHIP_CONF
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WIZPHY_GETPHYSTAT?WIZCHIP_CONF
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_GETSN_TX_FSR?W5500
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WIZ_RECV_IGNORE?W5500
+
+Program Size: data=9.0 xdata=241 code=9430
+LINK/LOCATE RUN COMPLETE.  11 WARNING(S),  0 ERROR(S)

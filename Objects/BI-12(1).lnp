@@ -1,0 +1,10 @@
+".\Objects\main.obj",
+".\Objects\Device_Init.obj",
+".\Objects\my_fnc.obj",
+".\Objects\wizchip_conf.obj",
+".\Objects\w5500.obj",
+".\Objects\STARTUP.obj",
+".\Objects\my_wiznet.obj" 
+TO ".\Objects\BI-12(1)" 
+PRINT(".\Listings\BI-12(1).m51") RAMSIZE(256) 
+XDATA( 0X0000-0X0FFF )

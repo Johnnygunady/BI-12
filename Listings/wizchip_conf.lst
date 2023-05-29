@@ -1,0 +1,984 @@
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE WIZCHIP_CONF
+OBJECT MODULE PLACED IN .\Objects\wizchip_conf.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE wiznet\Ethernet\wizchip_conf.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\
+                    -BI-12(1);.\wiznet\Ethernet;.\wiznet\Ethernet\W5500;C:\Keil_v5\C51\INC;C:\Keil_v5\C51\INC\SiLABS;C:\Keil_v5\C51\LIB;C:\Ke
+                    -il_v5\C51\BIN;D:\BI-12(1)) DEBUG OBJECTEXTEND PRINT(.\Listings\wizchip_conf.lst) TABS(2) OBJECT(.\Objects\wizchip_conf.o
+                    -bj)
+
+line level    source
+
+   1          //****************************************************************************/ 
+   2          //!
+   3          //! \file wizchip_conf.c
+   4          //! \brief WIZCHIP Config Header File.
+   5          //! \version 1.0.1
+   6          //! \date 2013/10/21
+   7          //! \par  Revision history
+   8          //!       <2015/02/05> Notice
+   9          //!        The version history is not updated after this point.
+  10          //!        Download the latest version directly from GitHub. Please visit the our GitHub repository for io
+             -Library.
+  11          //!        >> https://github.com/Wiznet/ioLibrary_Driver
+  12          //!       <2014/05/01> V1.0.1  Refer to M20140501
+  13          //!        1. Explicit type casting in wizchip_bus_readdata() & wizchip_bus_writedata()
+  14          //            Issued by Mathias ClauBen.
+  15          //!           uint32_t type converts into ptrdiff_t first. And then recoverting it into uint8_t*
+  16          //!           For remove the warning when pointer type size is not 32bit.
+  17          //!           If ptrdiff_t doesn't support in your complier, You should must replace ptrdiff_t into your s
+             -uitable pointer type.
+  18          //!       <2013/10/21> 1st Release
+  19          //! \author MidnightCow
+  20          //! \copyright
+  21          //!
+  22          //! Copyright (c)  2013, WIZnet Co., LTD.
+  23          //! All rights reserved.
+  24          //! 
+  25          //! Redistribution and use in source and binary forms, with or without 
+  26          //! modification, are permitted provided that the following conditions 
+  27          //! are met: 
+  28          //! 
+  29          //!     * Redistributions of source code must retain the above copyright 
+  30          //! notice, this list of conditions and the following disclaimer. 
+  31          //!     * Redistributions in binary form must reproduce the above copyright
+  32          //! notice, this list of conditions and the following disclaimer in the
+  33          //! documentation and/or other materials provided with the distribution. 
+  34          //!     * Neither the name of the <ORGANIZATION> nor the names of its 
+  35          //! contributors may be used to endorse or promote products derived 
+  36          //! from this software without specific prior written permission. 
+  37          //! 
+  38          //! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  39          //! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+  40          //! IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  41          //! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
+  42          //! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+  43          //! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+  44          //! SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  45          //! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+  46          //! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  47          //! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+  48          //! THE POSSIBILITY OF SUCH DAMAGE.
+  49          //
+  50          //*****************************************************************************/
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 2   
+
+  51          //A20140501 : for use the type - ptrdiff_t
+  52          #include <stddef.h>
+  53          //
+  54          
+  55          #include "wizchip_conf.h"
+  56          
+  57          /////////////
+  58          //M20150401 : Remove ; in the default callback function such as wizchip_cris_enter(), wizchip_cs_select() 
+             -and etc.
+  59          /////////////
+  60          
+  61          /**
+  62           * @brief Default function to enable interrupt.
+  63           * @note This function help not to access wrong address. If you do not describe this function or register 
+             -any functions,
+  64           * null function is called.
+  65           */
+  66          //void    wizchip_cris_enter(void)           {};
+  67          void    wizchip_cris_enter(void)           {}
+  68          
+  69          /**
+  70           * @brief Default function to disable interrupt.
+  71           * @note This function help not to access wrong address. If you do not describe this function or register 
+             -any functions,
+  72           * null function is called.
+  73           */
+  74          //void    wizchip_cris_exit(void)          {};
+  75          void    wizchip_cris_exit(void)          {}
+  76          
+  77          /**
+  78           * @brief Default function to select chip.
+  79           * @note This function help not to access wrong address. If you do not describe this function or register 
+             -any functions,
+  80           * null function is called.
+  81           */
+  82          //void  wizchip_cs_select(void)            {};
+  83          void  wizchip_cs_select(void)            {}
+  84          
+  85          /**
+  86           * @brief Default function to deselect chip.
+  87           * @note This function help not to access wrong address. If you do not describe this function or register 
+             -any functions,
+  88           * null function is called.
+  89           */
+  90          //void  wizchip_cs_deselect(void)          {};
+  91          void  wizchip_cs_deselect(void)          {}
+  92          
+  93          /**
+  94           * @brief Default function to read in direct or indirect interface.
+  95           * @note This function help not to access wrong address. If you do not describe this function or register 
+             -any functions,
+  96           * null function is called.
+  97           */
+  98           //M20150601 : Rename the function for integrating with W5300
+  99          //uint8_t wizchip_bus_readbyte(uint32_t AddrSel) { return * ((volatile uint8_t *)((ptrdiff_t) AddrSel)); }
+ 100          iodata_t wizchip_bus_readdata(uint32_t AddrSel) { return * ((volatile iodata_t *)((ptrdiff_t) AddrSel)); }
+ 101          
+ 102          /**
+ 103           * @brief Default function to write in direct or indirect interface.
+ 104           * @note This function help not to access wrong address. If you do not describe this function or register 
+             -any functions,
+ 105           * null function is called.
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 3   
+
+ 106           */
+ 107          //M20150601 : Rename the function for integrating with W5300
+ 108          //void  wizchip_bus_writebyte(uint32_t AddrSel, uint8_t wb)  { *((volatile uint8_t*)((ptrdiff_t)AddrSel)) 
+             -= wb; }
+ 109          void  wizchip_bus_writedata(uint32_t AddrSel, iodata_t wb)  { *((volatile iodata_t*)((ptrdiff_t)AddrSel)) 
+             -= wb; }
+ 110          
+ 111          /**
+ 112           * @brief Default function to read in SPI interface.
+ 113           * @note This function help not to access wrong address. If you do not describe this function or register 
+             -any functions,
+ 114           * null function is called.
+ 115           */
+ 116          //uint8_t wizchip_spi_readbyte(void)        {return 0;};
+ 117          uint8_t wizchip_spi_readbyte(void)        {return 0;}
+ 118          
+ 119          /**
+ 120           * @brief Default function to write in SPI interface.
+ 121           * @note This function help not to access wrong address. If you do not describe this function or register 
+             -any functions,
+ 122           * null function is called.
+ 123           */
+ 124          //void  wizchip_spi_writebyte(uint8_t wb) {};
+ 125          void  wizchip_spi_writebyte(uint8_t wb) {}
+*** WARNING C280 IN LINE 125 OF wiznet\Ethernet\wizchip_conf.c: 'wb': unreferenced local variable
+ 126          
+ 127          /**
+ 128           * @brief Default function to burst read in SPI interface.
+ 129           * @note This function help not to access wrong address. If you do not describe this function or register 
+             -any functions,
+ 130           * null function is called.
+ 131           */
+ 132          //void  wizchip_spi_readburst(uint8_t* pBuf, uint16_t len)  {}; 
+ 133          void  wizchip_spi_readburst(uint8_t* pBuf, uint16_t len)  {}
+*** WARNING C280 IN LINE 133 OF wiznet\Ethernet\wizchip_conf.c: 'pBuf': unreferenced local variable
+*** WARNING C280 IN LINE 133 OF wiznet\Ethernet\wizchip_conf.c: 'len': unreferenced local variable
+ 134          
+ 135          /**
+ 136           * @brief Default function to burst write in SPI interface.
+ 137           * @note This function help not to access wrong address. If you do not describe this function or register 
+             -any functions,
+ 138           * null function is called.
+ 139           */
+ 140          //void  wizchip_spi_writeburst(uint8_t* pBuf, uint16_t len) {};
+ 141          void  wizchip_spi_writeburst(uint8_t* pBuf, uint16_t len) {}
+*** WARNING C280 IN LINE 141 OF wiznet\Ethernet\wizchip_conf.c: 'pBuf': unreferenced local variable
+*** WARNING C280 IN LINE 141 OF wiznet\Ethernet\wizchip_conf.c: 'len': unreferenced local variable
+ 142          
+ 143          /**
+ 144           * @\ref _WIZCHIP instance
+ 145           */
+ 146          //
+ 147          //M20150401 : For a compiler didnot support a member of structure
+ 148          //            Replace the assignment of struct members with the assingment of array
+ 149          //
+ 150          /*
+ 151          _WIZCHIP  WIZCHIP =
+ 152                {
+ 153                .id                  = _WIZCHIP_ID_,
+ 154                .if_mode             = _WIZCHIP_IO_MODE_,
+ 155                .CRIS._enter         = wizchip_cris_enter,
+ 156                .CRIS._exit          = wizchip_cris_exit,
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 4   
+
+ 157                .CS._select          = wizchip_cs_select,
+ 158                .CS._deselect        = wizchip_cs_deselect,
+ 159                .IF.BUS._read_byte   = wizchip_bus_readbyte,
+ 160                .IF.BUS._write_byte  = wizchip_bus_writebyte
+ 161          //    .IF.SPI._read_byte   = wizchip_spi_readbyte,
+ 162          //    .IF.SPI._write_byte  = wizchip_spi_writebyte
+ 163                };
+ 164          */      
+ 165          _WIZCHIP  WIZCHIP =
+ 166          {
+ 167              _WIZCHIP_IO_MODE_,
+ 168              _WIZCHIP_ID_ ,
+ 169              {
+ 170                  wizchip_cris_enter,
+ 171                  wizchip_cris_exit
+ 172              },
+ 173              {
+ 174                  wizchip_cs_select,
+ 175                  wizchip_cs_deselect
+ 176              },
+ 177              {
+ 178                  {
+ 179                      //M20150601 : Rename the function 
+ 180                      //wizchip_bus_readbyte,
+ 181                      //wizchip_bus_writebyte
+ 182                      wizchip_bus_readdata,
+ 183                      wizchip_bus_writedata
+ 184                  },
+ 185          
+ 186              }
+ 187          };
+ 188          
+ 189          
+ 190          static uint8_t    _DNS_[4];      // DNS server ip address
+ 191          static dhcp_mode  _DHCP_;        // DHCP mode
+ 192          
+ 193          void reg_wizchip_cris_cbfunc(void(*cris_en)(void), void(*cris_ex)(void))
+ 194          {
+ 195   1         if(!cris_en || !cris_ex)
+ 196   1         {
+ 197   2            WIZCHIP.CRIS._enter = wizchip_cris_enter;
+ 198   2            WIZCHIP.CRIS._exit  = wizchip_cris_exit;
+ 199   2         }
+ 200   1         else
+ 201   1         {
+ 202   2            WIZCHIP.CRIS._enter = cris_en;
+ 203   2            WIZCHIP.CRIS._exit  = cris_ex;
+ 204   2         }
+ 205   1      }
+ 206          
+ 207          void reg_wizchip_cs_cbfunc(void(*cs_sel)(void), void(*cs_desel)(void))
+ 208          {
+ 209   1         if(!cs_sel || !cs_desel)
+ 210   1         {
+ 211   2            WIZCHIP.CS._select   = wizchip_cs_select;
+ 212   2            WIZCHIP.CS._deselect = wizchip_cs_deselect;
+ 213   2         }
+ 214   1         else
+ 215   1         {
+ 216   2            WIZCHIP.CS._select   = cs_sel;
+ 217   2            WIZCHIP.CS._deselect = cs_desel;
+ 218   2         }
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 5   
+
+ 219   1      }
+ 220          
+ 221          //M20150515 : For integrating with W5300
+ 222          //void reg_wizchip_bus_cbfunc(uint8_t(*bus_rb)(uint32_t addr), void (*bus_wb)(uint32_t addr, uint8_t wb))
+ 223          void reg_wizchip_bus_cbfunc(iodata_t(*bus_rb)(uint32_t addr), void (*bus_wb)(uint32_t addr, iodata_t wb))
+ 224          {
+ 225   1         while(!(WIZCHIP.if_mode & _WIZCHIP_IO_MODE_BUS_));
+ 226   1         //M20150601 : Rename call back function for integrating with W5300
+ 227   1         /*
+ 228   1         if(!bus_rb || !bus_wb)
+ 229   1         {
+ 230   1            WIZCHIP.IF.BUS._read_byte   = wizchip_bus_readbyte;
+ 231   1            WIZCHIP.IF.BUS._write_byte  = wizchip_bus_writebyte;
+ 232   1         }
+ 233   1         else
+ 234   1         {
+ 235   1            WIZCHIP.IF.BUS._read_byte   = bus_rb;
+ 236   1            WIZCHIP.IF.BUS._write_byte  = bus_wb;
+ 237   1         }
+ 238   1         */
+ 239   1         if(!bus_rb || !bus_wb)
+ 240   1         {
+ 241   2            WIZCHIP.IF.BUS._read_data   = wizchip_bus_readdata;
+ 242   2            WIZCHIP.IF.BUS._write_data  = wizchip_bus_writedata;
+ 243   2         }
+ 244   1         else
+ 245   1         {
+ 246   2            WIZCHIP.IF.BUS._read_data   = bus_rb;
+ 247   2            WIZCHIP.IF.BUS._write_data  = bus_wb;
+ 248   2         }
+ 249   1      }
+ 250          
+ 251          void reg_wizchip_spi_cbfunc(uint8_t (*spi_rb)(void), void (*spi_wb)(uint8_t wb))
+ 252          {
+ 253   1         while(!(WIZCHIP.if_mode & _WIZCHIP_IO_MODE_SPI_));
+ 254   1         
+ 255   1         if(!spi_rb || !spi_wb)
+ 256   1         {
+ 257   2            WIZCHIP.IF.SPI._read_byte   = wizchip_spi_readbyte;
+ 258   2            WIZCHIP.IF.SPI._write_byte  = wizchip_spi_writebyte;
+ 259   2         }
+ 260   1         else
+ 261   1         {
+ 262   2            WIZCHIP.IF.SPI._read_byte   = spi_rb;
+ 263   2            WIZCHIP.IF.SPI._write_byte  = spi_wb;
+ 264   2         }
+ 265   1      }
+ 266          
+ 267          // 20140626 Eric Added for SPI burst operations
+ 268          void reg_wizchip_spiburst_cbfunc(void (*spi_rb)(uint8_t* pBuf, uint16_t len), void (*spi_wb)(uint8_t* pBuf
+             -, uint16_t len))
+ 269          {
+ 270   1         while(!(WIZCHIP.if_mode & _WIZCHIP_IO_MODE_SPI_));
+ 271   1      
+ 272   1         if(!spi_rb || !spi_wb)
+ 273   1         {
+ 274   2            WIZCHIP.IF.SPI._read_burst   = wizchip_spi_readburst;
+ 275   2            WIZCHIP.IF.SPI._write_burst  = wizchip_spi_writeburst;
+ 276   2         }
+ 277   1         else
+ 278   1         {
+ 279   2            WIZCHIP.IF.SPI._read_burst   = spi_rb;
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 6   
+
+ 280   2            WIZCHIP.IF.SPI._write_burst  = spi_wb;
+ 281   2         }
+ 282   1      }
+ 283          
+ 284          int8_t ctlwizchip(ctlwizchip_type cwtype, void* arg)
+ 285          {
+ 286   1      #if _WIZCHIP_ == W5100S || _WIZCHIP_ == W5200 || _WIZCHIP_ == W5500
+ 287   1         uint8_t tmp = 0;
+ 288   1      #endif
+ 289   1         uint8_t* ptmp[2] = {0,0};
+ 290   1         switch(cwtype)
+ 291   1         {
+ 292   2            case CW_RESET_WIZCHIP:
+ 293   2               wizchip_sw_reset();
+ 294   2               break;
+ 295   2            case CW_INIT_WIZCHIP:
+ 296   2               if(arg != 0) 
+ 297   2               {
+ 298   3                  ptmp[0] = (uint8_t*)arg;
+ 299   3                  ptmp[1] = ptmp[0] + _WIZCHIP_SOCK_NUM_;
+ 300   3               }
+ 301   2               return wizchip_init(ptmp[0], ptmp[1]);
+ 302   2            case CW_CLR_INTERRUPT:
+ 303   2               wizchip_clrinterrupt(*((intr_kind*)arg));
+ 304   2               break;
+ 305   2            case CW_GET_INTERRUPT:
+ 306   2              *((intr_kind*)arg) = wizchip_getinterrupt();
+ 307   2               break;
+ 308   2            case CW_SET_INTRMASK:
+ 309   2               wizchip_setinterruptmask(*((intr_kind*)arg));
+ 310   2               break;         
+ 311   2            case CW_GET_INTRMASK:
+ 312   2               *((intr_kind*)arg) = wizchip_getinterruptmask();
+ 313   2               break;
+ 314   2         //M20150601 : This can be supported by W5200, W5500
+ 315   2         //#if _WIZCHIP_ > W5100
+ 316   2         #if (_WIZCHIP_ == W5200 || _WIZCHIP_ == W5500)
+ 317   2            case CW_SET_INTRTIME:
+ 318   2               setINTLEVEL(*(uint16_t*)arg);
+ 319   2               break;
+ 320   2            case CW_GET_INTRTIME:
+ 321   2               *(uint16_t*)arg = getINTLEVEL();
+ 322   2               break;
+ 323   2         #endif
+ 324   2            case CW_GET_ID:
+ 325   2               ((uint8_t*)arg)[0] = WIZCHIP.id[0];
+ 326   2               ((uint8_t*)arg)[1] = WIZCHIP.id[1];
+ 327   2               ((uint8_t*)arg)[2] = WIZCHIP.id[2];
+ 328   2               ((uint8_t*)arg)[3] = WIZCHIP.id[3];
+ 329   2               ((uint8_t*)arg)[4] = WIZCHIP.id[4];
+ 330   2               ((uint8_t*)arg)[5] = WIZCHIP.id[5];
+ 331   2               ((uint8_t*)arg)[6] = 0;
+ 332   2               break;
+ 333   2         #if _WIZCHIP_ == W5100S || _WIZCHIP_ == W5500
+ 334   2            case CW_RESET_PHY:
+ 335   2               wizphy_reset();
+ 336   2               break;
+ 337   2            case CW_SET_PHYCONF:
+ 338   2               wizphy_setphyconf((wiz_PhyConf*)arg);
+ 339   2               break;
+ 340   2            case CW_GET_PHYCONF:
+ 341   2               wizphy_getphyconf((wiz_PhyConf*)arg);
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 7   
+
+ 342   2               break;
+ 343   2            case CW_GET_PHYSTATUS:
+ 344   2               break;
+ 345   2            case CW_SET_PHYPOWMODE:
+ 346   2               return wizphy_setphypmode(*(uint8_t*)arg);
+ 347   2         #endif
+ 348   2         #if _WIZCHIP_ == W5100S || _WIZCHIP_ == W5200 || _WIZCHIP_ == W5500
+ 349   2            case CW_GET_PHYPOWMODE:
+ 350   2               tmp = wizphy_getphypmode();
+ 351   2               if((int8_t)tmp == -1) return -1;
+ 352   2               *(uint8_t*)arg = tmp;
+ 353   2               break;
+ 354   2            case CW_GET_PHYLINK:
+ 355   2               tmp = wizphy_getphylink();
+ 356   2               if((int8_t)tmp == -1) return -1;
+ 357   2               *(uint8_t*)arg = tmp;
+ 358   2               break;
+ 359   2         #endif      
+ 360   2            default:
+ 361   2               return -1;
+ 362   2         }
+ 363   1         return 0;
+ 364   1      }
+ 365          
+ 366          
+ 367          int8_t ctlnetwork(ctlnetwork_type cntype, void* arg)
+ 368          {
+ 369   1         
+ 370   1         switch(cntype)
+ 371   1         {
+ 372   2            case CN_SET_NETINFO:
+ 373   2               wizchip_setnetinfo((wiz_NetInfo*)arg);
+ 374   2               break;
+ 375   2            case CN_GET_NETINFO:
+ 376   2               wizchip_getnetinfo((wiz_NetInfo*)arg);
+ 377   2               break;
+ 378   2            case CN_SET_NETMODE:
+ 379   2               return wizchip_setnetmode(*(netmode_type*)arg);
+ 380   2            case CN_GET_NETMODE:
+ 381   2               *(netmode_type*)arg = wizchip_getnetmode();
+ 382   2               break;
+ 383   2            case CN_SET_TIMEOUT:
+ 384   2               wizchip_settimeout((wiz_NetTimeout*)arg);
+ 385   2               break;
+ 386   2            case CN_GET_TIMEOUT:
+ 387   2               wizchip_gettimeout((wiz_NetTimeout*)arg);
+ 388   2               break;
+ 389   2            default:
+ 390   2               return -1;
+ 391   2         }
+ 392   1         return 0;
+ 393   1      }
+ 394          
+ 395          void wizchip_sw_reset(void)
+ 396          {
+ 397   1         uint8_t gw[4], sn[4], sip[4];
+ 398   1         uint8_t mac[6];
+ 399   1      //A20150601
+ 400   1      #if _WIZCHIP_IO_MODE_  == _WIZCHIP_IO_MODE_BUS_INDIR_
+                 uint16_t mr = (uint16_t)getMR();
+                 setMR(mr | MR_IND);
+              #endif
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 8   
+
+ 404   1      //
+ 405   1         getSHAR(mac);
+ 406   1         getGAR(gw);  getSUBR(sn);  getSIPR(sip);
+ 407   1         setMR(MR_RST);
+ 408   1         getMR(); // for delay
+ 409   1      //A2015051 : For indirect bus mode 
+ 410   1      #if _WIZCHIP_IO_MODE_  == _WIZCHIP_IO_MODE_BUS_INDIR_
+                 setMR(mr | MR_IND);
+              #endif
+ 413   1      //
+ 414   1         setSHAR(mac);
+ 415   1         setGAR(gw);
+ 416   1         setSUBR(sn);
+ 417   1         setSIPR(sip);
+ 418   1      }
+ 419          
+ 420          int8_t wizchip_init(uint8_t* txsize, uint8_t* rxsize)
+ 421          {
+ 422   1         int8_t i;
+ 423   1      #if _WIZCHIP_ < W5200
+                 int8_t j;
+              #endif
+ 426   1         int8_t tmp = 0;
+ 427   1         wizchip_sw_reset();
+ 428   1         if(txsize)
+ 429   1         {
+ 430   2            tmp = 0;
+ 431   2      //M20150601 : For integrating with W5300
+ 432   2      #if _WIZCHIP_ == W5300
+                  for(i = 0 ; i < _WIZCHIP_SOCK_NUM_; i++)
+                  {
+                    if(txsize[i] > 64) return -1;   //No use 64KB even if W5300 support max 64KB memory allocation
+                    tmp += txsize[i];
+                    if(tmp > 128) return -1;
+                  }
+                  if(tmp % 8) return -1;
+              #else
+ 441   2          for(i = 0 ; i < _WIZCHIP_SOCK_NUM_; i++)
+ 442   2          {
+ 443   3            tmp += txsize[i];
+ 444   3      
+ 445   3      #if _WIZCHIP_ < W5200 //2016.10.28 peter add condition for w5100 and w5100s
+                    if(tmp > 8) return -1;
+              #else
+ 448   3            if(tmp > 16) return -1;
+ 449   3      #endif
+ 450   3          }
+ 451   2      #endif
+ 452   2          for(i = 0 ; i < _WIZCHIP_SOCK_NUM_; i++)
+ 453   2          {
+ 454   3      #if _WIZCHIP_ < W5200 //2016.10.28 peter add condition for w5100
+                    j = 0;
+                    while((txsize[i] >> j != 1)&&(txsize[i] !=0)){j++;}
+                    setSn_TXBUF_SIZE(i, j);
+              #else
+ 459   3            setSn_TXBUF_SIZE(i, txsize[i]);
+ 460   3      #endif
+ 461   3          } 
+ 462   2         }
+ 463   1      
+ 464   1         if(rxsize)
+ 465   1         {
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 9   
+
+ 466   2            tmp = 0;
+ 467   2      #if _WIZCHIP_ == W5300
+                    for(i = 0 ; i < _WIZCHIP_SOCK_NUM_; i++)
+                  {
+                    if(rxsize[i] > 64) return -1;   //No use 64KB even if W5300 support max 64KB memory allocation
+                    tmp += rxsize[i];
+                    if(tmp > 128) return -1;
+                  }
+                  if(tmp % 8) return -1;
+              #else
+ 476   2          for(i = 0 ; i < _WIZCHIP_SOCK_NUM_; i++)
+ 477   2          {
+ 478   3            tmp += rxsize[i];
+ 479   3      #if _WIZCHIP_ < W5200 //2016.10.28 peter add condition for w5100 and w5100s
+                    if(tmp > 8) return -1;
+              #else
+ 482   3            if(tmp > 16) return -1;
+ 483   3      #endif
+ 484   3          }
+ 485   2      #endif
+ 486   2          for(i = 0 ; i < _WIZCHIP_SOCK_NUM_; i++)
+ 487   2          {
+ 488   3      #if _WIZCHIP_ < W5200 // add condition for w5100
+                    j = 0;
+                    while((rxsize[i] >> j != 1)&&(txsize[i] !=0)){j++;}
+                    setSn_RXBUF_SIZE(i, j);
+              #else
+ 493   3            setSn_RXBUF_SIZE(i, rxsize[i]);
+ 494   3      #endif
+ 495   3          }
+ 496   2         }
+ 497   1         return 0;
+ 498   1      }
+ 499          
+ 500          void wizchip_clrinterrupt(intr_kind intr)
+ 501          {
+ 502   1         uint8_t ir  = (uint8_t)intr;
+ 503   1         uint8_t sir = (uint8_t)((uint16_t)intr >> 8);
+ 504   1      #if _WIZCHIP_ < W5500
+                 ir |= (1<<4); // IK_WOL
+              #endif
+ 507   1      #if _WIZCHIP_ == W5200
+                 ir |= (1 << 6);
+              #endif
+ 510   1         
+ 511   1      #if _WIZCHIP_ < W5200
+                 sir &= 0x0F;
+              #endif
+ 514   1      
+ 515   1      #if _WIZCHIP_ <= W5100S
+                 ir |= sir;
+                 setIR(ir);
+              //A20150601 : For integrating with W5300
+              #elif _WIZCHIP_ == W5300
+                 setIR( ((((uint16_t)ir) << 8) | (((uint16_t)sir) & 0x00FF)) );
+              #else
+ 522   1         setIR(ir);
+ 523   1      //M20200227 : For clear
+ 524   1         //setSIR(sir);
+ 525   1         for(ir=0; ir<8; ir++){
+ 526   2             if(sir & (0x01 <<ir) ) setSn_IR(ir, 0xff);
+ 527   2         }
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 10  
+
+ 528   1      
+ 529   1      #endif   
+ 530   1      }
+ 531          
+ 532          intr_kind wizchip_getinterrupt(void)
+ 533          {
+ 534   1         uint8_t ir  = 0;
+ 535   1         uint8_t sir = 0;
+ 536   1         uint16_t ret = 0;
+ 537   1      #if _WIZCHIP_ <= W5100S
+                 ir = getIR();
+                 sir = ir & 0x0F;
+              //A20150601 : For integrating with W5300
+              #elif _WIZCHIP_  == W5300
+                 ret = getIR();
+                 ir = (uint8_t)(ret >> 8);
+                 sir = (uint8_t)ret;
+              #else
+ 546   1         ir  = getIR();
+ 547   1         sir = getSIR();
+ 548   1      #endif         
+ 549   1      
+ 550   1      //M20150601 : For Integrating with W5300
+ 551   1      //#if _WIZCHIP_ < W5500
+ 552   1      #if _WIZCHIP_ < W5200
+                 ir &= ~(1<<4); // IK_WOL
+              #endif
+ 555   1      #if _WIZCHIP_ == W5200
+                 ir &= ~(1 << 6);
+              #endif
+ 558   1        ret = sir;
+ 559   1        ret = (ret << 8) + ir;
+ 560   1        return (intr_kind)ret;
+ 561   1      }
+ 562          
+ 563          void wizchip_setinterruptmask(intr_kind intr)
+ 564          {
+ 565   1         uint8_t imr  = (uint8_t)intr;
+ 566   1         uint8_t simr = (uint8_t)((uint16_t)intr >> 8);
+ 567   1      #if _WIZCHIP_ < W5500
+                 imr &= ~(1<<4); // IK_WOL
+              #endif
+ 570   1      #if _WIZCHIP_ == W5200
+                 imr &= ~(1 << 6);
+              #endif
+ 573   1         
+ 574   1      #if _WIZCHIP_ < W5200
+                 simr &= 0x0F;
+                 imr |= simr;
+                 setIMR(imr);
+              //A20150601 : For integrating with W5300
+              #elif _WIZCHIP_ == W5300
+                 setIMR( ((((uint16_t)imr) << 8) | (((uint16_t)simr) & 0x00FF)) );
+              #else
+ 582   1         setIMR(imr);
+ 583   1         setSIMR(simr);
+ 584   1      #endif   
+ 585   1      }
+ 586          
+ 587          intr_kind wizchip_getinterruptmask(void)
+ 588          {
+ 589   1         uint8_t imr  = 0;
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 11  
+
+ 590   1         uint8_t simr = 0;
+ 591   1         uint16_t ret = 0;
+ 592   1      #if _WIZCHIP_ < W5200
+                 imr  = getIMR();
+                 simr = imr & 0x0F;
+              //A20150601 : For integrating with W5300
+              #elif _WIZCHIP_ == W5300
+                 ret = getIMR();
+                 imr = (uint8_t)(ret >> 8);
+                 simr = (uint8_t)ret;
+              #else
+ 601   1         imr  = getIMR();
+ 602   1         simr = getSIMR();
+ 603   1      #endif         
+ 604   1      
+ 605   1      #if _WIZCHIP_ < W5500
+                 imr &= ~(1<<4); // IK_WOL
+              #endif
+ 608   1      #if _WIZCHIP_ == W5200
+                 imr &= ~(1 << 6);  // IK_DEST_UNREACH
+              #endif
+ 611   1        ret = simr;
+ 612   1        ret = (ret << 8) + imr;
+ 613   1        return (intr_kind)ret;
+ 614   1      }
+ 615          
+ 616          int8_t wizphy_getphylink(void)
+ 617          {
+ 618   1         int8_t tmp = PHY_LINK_OFF;
+ 619   1      #if _WIZCHIP_ == W5100S
+                 if(getPHYSR() & PHYSR_LNK)
+                   tmp = PHY_LINK_ON;
+              #elif   _WIZCHIP_ == W5200
+                 if(getPHYSTATUS() & PHYSTATUS_LINK)
+                    tmp = PHY_LINK_ON;
+              #elif _WIZCHIP_ == W5500
+ 626   1         if(getPHYCFGR() & PHYCFGR_LNK_ON)
+ 627   1            tmp = PHY_LINK_ON;
+ 628   1      
+ 629   1      #else
+                 tmp = -1;
+              #endif
+ 632   1         return tmp;
+ 633   1      }
+ 634          
+ 635          #if _WIZCHIP_ > W5100
+ 636          
+ 637          int8_t wizphy_getphypmode(void)
+ 638          {
+ 639   1         int8_t tmp = 0;
+ 640   1         #if   _WIZCHIP_ == W5200
+                    if(getPHYSTATUS() & PHYSTATUS_POWERDOWN)
+                       tmp = PHY_POWER_DOWN;
+                    else          
+                       tmp = PHY_POWER_NORM;
+                 #elif _WIZCHIP_ == 5500
+ 646   1            if((getPHYCFGR() & PHYCFGR_OPMDC_ALLA) == PHYCFGR_OPMDC_PDOWN)
+ 647   1               tmp = PHY_POWER_DOWN;
+ 648   1            else 
+ 649   1               tmp = PHY_POWER_NORM;
+ 650   1         #else
+                    tmp = -1;
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 12  
+
+                 #endif
+ 653   1         return tmp;
+ 654   1      }
+ 655          #endif
+ 656          
+ 657          #if _WIZCHIP_ == W5100S
+              void wizphy_reset(void)
+              {
+                uint16_t tmp = wiz_mdio_read(PHYMDIO_BMCR);
+                tmp |= BMCR_RESET;
+                wiz_mdio_write(PHYMDIO_BMCR, tmp);
+                while(wiz_mdio_read(PHYMDIO_BMCR)&BMCR_RESET){}
+              }
+              
+              void wizphy_setphyconf(wiz_PhyConf* phyconf)
+              {
+                 uint16_t tmp = wiz_mdio_read(PHYMDIO_BMCR);
+                 if(phyconf->mode == PHY_MODE_AUTONEGO)
+                    tmp |= BMCR_AUTONEGO;
+                 else
+                 {
+                  tmp &= ~BMCR_AUTONEGO;
+                    if(phyconf->duplex == PHY_DUPLEX_FULL)
+                    {
+                      tmp |= BMCR_DUP;
+                    }
+                    else
+                    {
+                      tmp &= ~BMCR_DUP;
+                    }
+                    if(phyconf->speed == PHY_SPEED_100)
+                    {
+                      tmp |= BMCR_SPEED;
+                    }
+                    else
+                    {
+                      tmp &= ~BMCR_SPEED;
+                    }
+                 }
+                 wiz_mdio_write(PHYMDIO_BMCR, tmp);
+              }
+              
+              void wizphy_getphyconf(wiz_PhyConf* phyconf)
+              {
+                 uint16_t tmp = 0;
+                 tmp = wiz_mdio_read(PHYMDIO_BMCR);
+                 phyconf->by   = PHY_CONFBY_SW;
+                 if(tmp & BMCR_AUTONEGO)
+                 {
+                   phyconf->mode = PHY_MODE_AUTONEGO;
+                 }
+                 else
+                 {
+                   phyconf->mode = PHY_MODE_MANUAL;
+                   if(tmp&BMCR_DUP) phyconf->duplex = PHY_DUPLEX_FULL;
+                   else phyconf->duplex = PHY_DUPLEX_HALF;
+                   if(tmp&BMCR_SPEED) phyconf->speed = PHY_SPEED_100;
+                   else phyconf->speed = PHY_SPEED_10;
+                 }
+              }
+              
+              int8_t wizphy_setphypmode(uint8_t pmode)
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 13  
+
+              {
+                 uint16_t tmp = 0;
+                 tmp = wiz_mdio_read(PHYMDIO_BMCR);
+                 if( pmode == PHY_POWER_DOWN)
+                 {
+                    tmp |= BMCR_PWDN;
+                 }
+                 else
+                 {
+                   tmp &= ~BMCR_PWDN;
+                 }
+                 wiz_mdio_write(PHYMDIO_BMCR, tmp);
+                 tmp = wiz_mdio_read(PHYMDIO_BMCR);
+                 if( pmode == PHY_POWER_DOWN)
+                 {
+                    if(tmp & BMCR_PWDN) return 0;
+                 }
+                 else
+                 {
+                    if((tmp & BMCR_PWDN) != BMCR_PWDN) return 0;
+                 }
+                 return -1;
+              }
+              
+              #endif
+ 739          #if _WIZCHIP_ == W5500
+ 740          void wizphy_reset(void)
+ 741          {
+ 742   1         uint8_t tmp = getPHYCFGR();
+ 743   1         tmp &= PHYCFGR_RST;
+ 744   1         setPHYCFGR(tmp);
+ 745   1         tmp = getPHYCFGR();
+ 746   1         tmp |= ~PHYCFGR_RST;
+ 747   1         setPHYCFGR(tmp);
+ 748   1      }
+ 749          
+ 750          void wizphy_setphyconf(wiz_PhyConf* phyconf)
+ 751          {
+ 752   1         uint8_t tmp = 0;
+ 753   1         if(phyconf->by == PHY_CONFBY_SW)
+ 754   1            tmp |= PHYCFGR_OPMD;
+ 755   1         else
+ 756   1            tmp &= ~PHYCFGR_OPMD;
+ 757   1         if(phyconf->mode == PHY_MODE_AUTONEGO)
+ 758   1            tmp |= PHYCFGR_OPMDC_ALLA;
+ 759   1         else
+ 760   1         {
+ 761   2            if(phyconf->duplex == PHY_DUPLEX_FULL)
+ 762   2            {
+ 763   3               if(phyconf->speed == PHY_SPEED_100)
+ 764   3                  tmp |= PHYCFGR_OPMDC_100F;
+ 765   3               else
+ 766   3                  tmp |= PHYCFGR_OPMDC_10F;
+ 767   3            }   
+ 768   2            else
+ 769   2            {
+ 770   3               if(phyconf->speed == PHY_SPEED_100)
+ 771   3                  tmp |= PHYCFGR_OPMDC_100H;
+ 772   3               else
+ 773   3                  tmp |= PHYCFGR_OPMDC_10H;
+ 774   3            }
+ 775   2         }
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 14  
+
+ 776   1         setPHYCFGR(tmp);
+ 777   1         wizphy_reset();
+ 778   1      }
+ 779          
+ 780          void wizphy_getphyconf(wiz_PhyConf* phyconf)
+ 781          {
+ 782   1         uint8_t tmp = 0;
+ 783   1         tmp = getPHYCFGR();
+ 784   1         phyconf->by   = (tmp & PHYCFGR_OPMD) ? PHY_CONFBY_SW : PHY_CONFBY_HW;
+ 785   1         switch(tmp & PHYCFGR_OPMDC_ALLA)
+ 786   1         {
+ 787   2            case PHYCFGR_OPMDC_ALLA:
+ 788   2            case PHYCFGR_OPMDC_100FA: 
+ 789   2               phyconf->mode = PHY_MODE_AUTONEGO;
+ 790   2               break;
+ 791   2            default:
+ 792   2               phyconf->mode = PHY_MODE_MANUAL;
+ 793   2               break;
+ 794   2         }
+ 795   1         switch(tmp & PHYCFGR_OPMDC_ALLA)
+ 796   1         {
+ 797   2            case PHYCFGR_OPMDC_100FA:
+ 798   2            case PHYCFGR_OPMDC_100F:
+ 799   2            case PHYCFGR_OPMDC_100H:
+ 800   2               phyconf->speed = PHY_SPEED_100;
+ 801   2               break;
+ 802   2            default:
+ 803   2               phyconf->speed = PHY_SPEED_10;
+ 804   2               break;
+ 805   2         }
+ 806   1         switch(tmp & PHYCFGR_OPMDC_ALLA)
+ 807   1         {
+ 808   2            case PHYCFGR_OPMDC_100FA:
+ 809   2            case PHYCFGR_OPMDC_100F:
+ 810   2            case PHYCFGR_OPMDC_10F:
+ 811   2               phyconf->duplex = PHY_DUPLEX_FULL;
+ 812   2               break;
+ 813   2            default:
+ 814   2               phyconf->duplex = PHY_DUPLEX_HALF;
+ 815   2               break;
+ 816   2         }
+ 817   1      }
+ 818          
+ 819          void wizphy_getphystat(wiz_PhyConf* phyconf)
+ 820          {
+ 821   1         uint8_t tmp = getPHYCFGR();
+ 822   1         phyconf->duplex = (tmp & PHYCFGR_DPX_FULL) ? PHY_DUPLEX_FULL : PHY_DUPLEX_HALF;
+ 823   1         phyconf->speed  = (tmp & PHYCFGR_SPD_100) ? PHY_SPEED_100 : PHY_SPEED_10;
+ 824   1      }
+ 825          
+ 826          int8_t wizphy_setphypmode(uint8_t pmode)
+ 827          {
+ 828   1         uint8_t tmp = 0;
+ 829   1         tmp = getPHYCFGR();
+ 830   1         if((tmp & PHYCFGR_OPMD)== 0) return -1;
+ 831   1         tmp &= ~PHYCFGR_OPMDC_ALLA;         
+ 832   1         if( pmode == PHY_POWER_DOWN)
+ 833   1            tmp |= PHYCFGR_OPMDC_PDOWN;
+ 834   1         else
+ 835   1            tmp |= PHYCFGR_OPMDC_ALLA;
+ 836   1         setPHYCFGR(tmp);
+ 837   1         wizphy_reset();
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 15  
+
+ 838   1         tmp = getPHYCFGR();
+ 839   1         if( pmode == PHY_POWER_DOWN)
+ 840   1         {
+ 841   2            if(tmp & PHYCFGR_OPMDC_PDOWN) return 0;
+ 842   2         }
+ 843   1         else
+ 844   1         {
+ 845   2            if(tmp & PHYCFGR_OPMDC_ALLA) return 0;
+ 846   2         }
+ 847   1         return -1;
+ 848   1      }
+ 849          #endif
+ 850          
+ 851          
+ 852          void wizchip_setnetinfo(wiz_NetInfo* pnetinfo)
+ 853          {
+ 854   1         setSHAR(pnetinfo->mac);
+ 855   1         setGAR(pnetinfo->gw);
+ 856   1         setSUBR(pnetinfo->sn);
+ 857   1         setSIPR(pnetinfo->ip);
+ 858   1         _DNS_[0] = pnetinfo->dns[0];
+ 859   1         _DNS_[1] = pnetinfo->dns[1];
+ 860   1         _DNS_[2] = pnetinfo->dns[2];
+ 861   1         _DNS_[3] = pnetinfo->dns[3];
+ 862   1         _DHCP_   = pnetinfo->dhcp;
+ 863   1      }
+ 864          
+ 865          void wizchip_getnetinfo(wiz_NetInfo* pnetinfo)
+ 866          {
+ 867   1         getSHAR(pnetinfo->mac);
+ 868   1         getGAR(pnetinfo->gw);
+ 869   1         getSUBR(pnetinfo->sn);
+ 870   1         getSIPR(pnetinfo->ip);
+ 871   1         pnetinfo->dns[0]= _DNS_[0];
+ 872   1         pnetinfo->dns[1]= _DNS_[1];
+ 873   1         pnetinfo->dns[2]= _DNS_[2];
+ 874   1         pnetinfo->dns[3]= _DNS_[3];
+ 875   1         pnetinfo->dhcp  = _DHCP_;
+ 876   1      }
+ 877          
+ 878          int8_t wizchip_setnetmode(netmode_type netmode)
+ 879          {
+ 880   1         uint8_t tmp = 0;
+ 881   1      #if _WIZCHIP_ != W5500
+                 if(netmode & ~(NM_WAKEONLAN | NM_PPPOE | NM_PINGBLOCK)) return -1;
+              #else
+ 884   1         if(netmode & ~(NM_WAKEONLAN | NM_PPPOE | NM_PINGBLOCK | NM_FORCEARP)) return -1;
+ 885   1      #endif      
+ 886   1         tmp = getMR();
+ 887   1         tmp |= (uint8_t)netmode;
+ 888   1         setMR(tmp);
+ 889   1         return 0;
+ 890   1      }
+ 891          
+ 892          netmode_type wizchip_getnetmode(void)
+ 893          {
+ 894   1         return (netmode_type) getMR();
+ 895   1      }
+ 896          
+ 897          void wizchip_settimeout(wiz_NetTimeout* nettime)
+ 898          {
+ 899   1         setRCR(nettime->retry_cnt);
+C51 COMPILER V9.60.7.0   WIZCHIP_CONF                                                      05/29/2023 20:18:30 PAGE 16  
+
+ 900   1         setRTR(nettime->time_100us);
+ 901   1      }
+ 902          
+ 903          void wizchip_gettimeout(wiz_NetTimeout* nettime)
+ 904          {
+ 905   1         nettime->retry_cnt = getRCR();
+ 906   1         nettime->time_100us = getRTR();
+ 907   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   3570    ----
+   CONSTANT SIZE    =      6    ----
+   XDATA SIZE       =     39     114
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  5 WARNING(S),  0 ERROR(S)

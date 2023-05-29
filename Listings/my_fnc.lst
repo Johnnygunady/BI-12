@@ -1,0 +1,165 @@
+C51 COMPILER V9.60.7.0   MY_FNC                                                            05/29/2023 20:18:30 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MY_FNC
+OBJECT MODULE PLACED IN .\Objects\my_fnc.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE my_fnc.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\BI-12(1);.\wiznet\Ethe
+                    -rnet;.\wiznet\Ethernet\W5500;C:\Keil_v5\C51\INC;C:\Keil_v5\C51\INC\SiLABS;C:\Keil_v5\C51\LIB;C:\Keil_v5\C51\BIN;D:\BI-12
+                    -(1)) DEBUG OBJECTEXTEND PRINT(.\Listings\my_fnc.lst) TABS(2) OBJECT(.\Objects\my_fnc.obj)
+
+line level    source
+
+   1          
+   2          #include "my_fnc.h"
+   3          #include "SPI_Defs.h"
+   4          
+   5          
+   6          
+   7          extern const uint8_t xdata gw[4];
+   8          extern const uint8_t xdata mask[4]; 
+   9          extern const uint8_t xdata mac[6] ;
+  10          extern const uint8_t xdata ipadr[4];  
+  11          extern uint8_t  tmp1[6];
+  12          
+  13          
+  14          
+  15          void timer_start()      /* Timer0 delay function */
+  16          {
+  17   1        TH0 = 0xE1;     /* Load 8-bit in TH0 (here Timer0 used) */
+  18   1        TL0 = 0x05;     /* Load 5-bit in TL0 */
+  19   1        TR0 = 1;      /* Start timer0 */
+  20   1        //while(TF0 == 0);    /* Wait until timer0 flag set */
+  21   1        //TR0 = 0;      /* Stop timer0 */
+  22   1        //TF0 = 0;      /* Clear timer0 flag */
+  23   1      }
+  24          
+  25          void timectl()
+  26          {
+  27   1        while(!TF0);
+  28   1        TF0 = 0;
+  29   1      }
+  30          
+  31          void SPI_DDS_Write(uint16_t SPI_byte)
+  32          {
+  33   1        unsigned char SPI_count;
+  34   1        for (SPI_count = 0; SPI_count < 16; SPI_count++)
+  35   1          {
+  36   2            SCLK = 1;   
+  37   2            SDIH = (SPI_byte & 0x8000);           
+  38   2            SPI_byte = (SPI_byte << 1);       
+  39   2            SCLK = 0;
+  40   2         }    
+  41   1      }
+  42          
+  43          void freq_gen(uint16_t *freqs,
+  44                        uint8_t addr,
+  45                        struct BlockStat* StatData)
+  46          {
+  47   1        
+  48   1        uint16_t F0RWM = ((*(freqs+addr) & 0xF000) >> 12) | 0x4000;
+  49   1        uint16_t F0RWL =  ((*(freqs+addr) & 0x0FFF) >> 0) | 0x4000;
+  50   1        
+  51   1        PG_CSL = 0;
+  52   1        SPI_DDS_Write(RESET);
+  53   1        SPI_DDS_Write(F0RWL);
+C51 COMPILER V9.60.7.0   MY_FNC                                                            05/29/2023 20:18:30 PAGE 2   
+
+  54   1        SPI_DDS_Write(F0RWM);
+  55   1        SPI_DDS_Write(PHASE);
+  56   1        SPI_DDS_Write(DISRESET);
+  57   1        PG_CSL = 1; 
+  58   1        
+  59   1        StatData->PG = addr;
+  60   1      }
+  61          
+  62          void SPI_DAC_Write(uint16_t SPI_2byte)
+  63          {
+  64   1        uint16_t SPI_count;
+  65   1        for (SPI_count = 0; SPI_count < 16; SPI_count++)
+  66   1          {
+  67   2            SCLK = 0;     
+  68   2            SDIH = (SPI_2byte & 0x8000);              
+  69   2            SPI_2byte = (SPI_2byte << 1);       
+  70   2            SCLK = 1;
+  71   2         }    
+  72   1      }
+  73          
+  74          void DACD(uint16_t pr, struct BlockStat* StatData) // -1...1
+  75          {
+  76   1        DACD_CSL = 0;
+  77   1        SPI_DAC_Write(pr);
+  78   1        DACD_CSL = 1;
+  79   1        StatData->DACD = (pr);
+  80   1      } 
+  81          
+  82          void DACOS(uint16_t pr, struct BlockStat* StatData) //-66mV ... +66mV
+  83          {
+  84   1        DACOS_CSL = 0;
+  85   1        SPI_DAC_Write(pr);
+  86   1        DACOS_CSL = 1;
+  87   1        StatData->DACOS = (pr);
+  88   1        } 
+  89          
+  90          
+  91          
+  92          void dev_mux(uint8_t i, struct BlockStat* StatData)
+  93          {
+  94   1        P2 &= i;
+  95   1        StatData->devMUX = (i & 0x07);
+  96   1      }
+  97          
+  98          void out_mux(uint8_t i, struct BlockStat* StatData)
+  99          {
+ 100   1        P2 &= i;
+ 101   1        StatData->outMUX = (i & 0x38);
+ 102   1      }
+ 103          
+ 104          
+ 105          
+ 106          
+ 107          
+ 108              
+ 109          
+ 110          
+ 111          
+ 112          
+ 113          
+ 114          
+ 115          
+C51 COMPILER V9.60.7.0   MY_FNC                                                            05/29/2023 20:18:30 PAGE 3   
+
+ 116          
+ 117          
+ 118          
+ 119          
+ 120          
+ 121          
+ 122          
+ 123          
+ 124          
+ 125          
+ 126          
+ 127          
+ 128          
+ 129          
+ 130          
+ 131          
+ 132          
+ 133          
+ 134          
+ 135          
+ 136          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    322    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----      17
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

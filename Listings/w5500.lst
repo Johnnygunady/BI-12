@@ -1,0 +1,302 @@
+C51 COMPILER V9.60.7.0   W5500                                                             05/29/2023 20:18:31 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE W5500
+OBJECT MODULE PLACED IN .\Objects\w5500.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE wiznet\Ethernet\W5500\w5500.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\B
+                    -I-12(1);.\wiznet\Ethernet;.\wiznet\Ethernet\W5500;C:\Keil_v5\C51\INC;C:\Keil_v5\C51\INC\SiLABS;C:\Keil_v5\C51\LIB;C:\Kei
+                    -l_v5\C51\BIN;D:\BI-12(1)) DEBUG OBJECTEXTEND PRINT(.\Listings\w5500.lst) TABS(2) OBJECT(.\Objects\w5500.obj)
+
+line level    source
+
+   1          //*****************************************************************************
+   2          //
+   3          //! \file w5500.c
+   4          //! \brief W5500 HAL Interface.
+   5          //! \version 1.0.2
+   6          //! \date 2013/10/21
+   7          //! \par  Revision history
+   8          //!       <2015/02/05> Notice
+   9          //!        The version history is not updated after this point.
+  10          //!        Download the latest version directly from GitHub. Please visit the our GitHub repository for io
+             -Library.
+  11          //!        >> https://github.com/Wiznet/ioLibrary_Driver
+  12          //!       <2014/05/01> V1.0.2
+  13          //!         1. Implicit type casting -> Explicit type casting. Refer to M20140501
+  14          //!            Fixed the problem on porting into under 32bit MCU
+  15          //!            Issued by Mathias ClauBen, wizwiki forum ID Think01 and bobh
+  16          //!            Thank for your interesting and serious advices.
+  17          //!       <2013/12/20> V1.0.1
+  18          //!         1. Remove warning
+  19          //!         2. WIZCHIP_READ_BUF WIZCHIP_WRITE_BUF in case _WIZCHIP_IO_MODE_SPI_FDM_
+  20          //!            for loop optimized(removed). refer to M20131220
+  21          //!       <2013/10/21> 1st Release
+  22          //! \author MidnightCow
+  23          //! \copyright
+  24          //!
+  25          //! Copyright (c)  2013, WIZnet Co., LTD.
+  26          //! All rights reserved.
+  27          //! 
+  28          //! Redistribution and use in source and binary forms, with or without 
+  29          //! modification, are permitted provided that the following conditions 
+  30          //! are met: 
+  31          //! 
+  32          //!     * Redistributions of source code must retain the above copyright 
+  33          //! notice, this list of conditions and the following disclaimer. 
+  34          //!     * Redistributions in binary form must reproduce the above copyright
+  35          //! notice, this list of conditions and the following disclaimer in the
+  36          //! documentation and/or other materials provided with the distribution. 
+  37          //!     * Neither the name of the <ORGANIZATION> nor the names of its 
+  38          //! contributors may be used to endorse or promote products derived 
+  39          //! from this software without specific prior written permission. 
+  40          //! 
+  41          //! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  42          //! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+  43          //! IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  44          //! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
+  45          //! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+  46          //! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+  47          //! SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  48          //! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+  49          //! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+  50          //! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+  51          //! THE POSSIBILITY OF SUCH DAMAGE.
+  52          //
+C51 COMPILER V9.60.7.0   W5500                                                             05/29/2023 20:18:31 PAGE 2   
+
+  53          //*****************************************************************************
+  54          //#include <stdio.h>
+  55          #include "w5500.h"
+  56          
+  57          
+  58          #define _W5500_SPI_VDM_OP_          0x00
+  59          #define _W5500_SPI_FDM_OP_LEN1_     0x01
+  60          #define _W5500_SPI_FDM_OP_LEN2_     0x02
+  61          #define _W5500_SPI_FDM_OP_LEN4_     0x03
+  62          
+  63          #if   (_WIZCHIP_ == 5500)
+  64          ////////////////////////////////////////////////////
+  65          
+  66          uint8_t  WIZCHIP_READ(uint32_t AddrSel)
+  67          {
+  68   1         uint8_t ret;
+  69   1         uint8_t spi_data[3];
+  70   1      
+  71   1         WIZCHIP_CRITICAL_ENTER();
+  72   1         WIZCHIP.CS._select();
+  73   1      
+  74   1         AddrSel |= (_W5500_SPI_READ_ | _W5500_SPI_VDM_OP_);
+  75   1      
+  76   1         if(!WIZCHIP.IF.SPI._read_burst || !WIZCHIP.IF.SPI._write_burst)  // byte operation
+  77   1         {
+  78   2           WIZCHIP.IF.SPI._write_byte((AddrSel & 0x00FF0000) >> 16);
+  79   2          WIZCHIP.IF.SPI._write_byte((AddrSel & 0x0000FF00) >>  8);
+  80   2          WIZCHIP.IF.SPI._write_byte((AddrSel & 0x000000FF) >>  0);
+  81   2         }
+  82   1         else                               // burst operation
+  83   1         {
+  84   2          spi_data[0] = (AddrSel & 0x00FF0000) >> 16;
+  85   2          spi_data[1] = (AddrSel & 0x0000FF00) >> 8;
+  86   2          spi_data[2] = (AddrSel & 0x000000FF) >> 0;
+  87   2          WIZCHIP.IF.SPI._write_burst(spi_data, 3);
+  88   2         }
+  89   1         ret = WIZCHIP.IF.SPI._read_byte();
+  90   1      
+  91   1         WIZCHIP.CS._deselect();
+  92   1         WIZCHIP_CRITICAL_EXIT();
+  93   1         return ret;
+  94   1      }
+  95          
+  96          void     WIZCHIP_WRITE(uint32_t AddrSel, uint8_t wb )
+  97          {
+  98   1         uint8_t spi_data[4];
+  99   1      
+ 100   1         WIZCHIP_CRITICAL_ENTER();
+ 101   1         WIZCHIP.CS._select();
+ 102   1      
+ 103   1         AddrSel |= (_W5500_SPI_WRITE_ | _W5500_SPI_VDM_OP_);
+ 104   1      
+ 105   1         //if(!WIZCHIP.IF.SPI._read_burst || !WIZCHIP.IF.SPI._write_burst)  // byte operation
+ 106   1         if(!WIZCHIP.IF.SPI._write_burst)   // byte operation
+ 107   1         {
+ 108   2          WIZCHIP.IF.SPI._write_byte((AddrSel & 0x00FF0000) >> 16);
+ 109   2          WIZCHIP.IF.SPI._write_byte((AddrSel & 0x0000FF00) >>  8);
+ 110   2          WIZCHIP.IF.SPI._write_byte((AddrSel & 0x000000FF) >>  0);
+ 111   2          WIZCHIP.IF.SPI._write_byte(wb);
+ 112   2         }
+ 113   1         else                 // burst operation
+ 114   1         {
+C51 COMPILER V9.60.7.0   W5500                                                             05/29/2023 20:18:31 PAGE 3   
+
+ 115   2          spi_data[0] = (AddrSel & 0x00FF0000) >> 16;
+ 116   2          spi_data[1] = (AddrSel & 0x0000FF00) >> 8;
+ 117   2          spi_data[2] = (AddrSel & 0x000000FF) >> 0;
+ 118   2          spi_data[3] = wb;
+ 119   2          WIZCHIP.IF.SPI._write_burst(spi_data, 4);
+ 120   2         }
+ 121   1      
+ 122   1         WIZCHIP.CS._deselect();
+ 123   1         WIZCHIP_CRITICAL_EXIT();
+ 124   1      }
+ 125                   
+ 126          void     WIZCHIP_READ_BUF (uint32_t AddrSel, uint8_t* pBuf, uint16_t len)
+ 127          {
+ 128   1         uint8_t spi_data[3];
+ 129   1         uint16_t i;
+ 130   1      
+ 131   1         WIZCHIP_CRITICAL_ENTER();
+ 132   1         WIZCHIP.CS._select();
+ 133   1      
+ 134   1         AddrSel |= (_W5500_SPI_READ_ | _W5500_SPI_VDM_OP_);
+ 135   1      
+ 136   1         if(!WIZCHIP.IF.SPI._read_burst || !WIZCHIP.IF.SPI._write_burst)  // byte operation
+ 137   1         {
+ 138   2          WIZCHIP.IF.SPI._write_byte((AddrSel & 0x00FF0000) >> 16);
+ 139   2          WIZCHIP.IF.SPI._write_byte((AddrSel & 0x0000FF00) >>  8);
+ 140   2          WIZCHIP.IF.SPI._write_byte((AddrSel & 0x000000FF) >>  0);
+ 141   2          for(i = 0; i < len; i++)
+ 142   2             pBuf[i] = WIZCHIP.IF.SPI._read_byte();
+ 143   2         }
+ 144   1         else                               // burst operation
+ 145   1         {
+ 146   2          spi_data[0] = (AddrSel & 0x00FF0000) >> 16;
+ 147   2          spi_data[1] = (AddrSel & 0x0000FF00) >> 8;
+ 148   2          spi_data[2] = (AddrSel & 0x000000FF) >> 0;
+ 149   2          WIZCHIP.IF.SPI._write_burst(spi_data, 3);
+ 150   2          WIZCHIP.IF.SPI._read_burst(pBuf, len);
+ 151   2         }
+ 152   1      
+ 153   1         WIZCHIP.CS._deselect();
+ 154   1         WIZCHIP_CRITICAL_EXIT();
+ 155   1      }
+ 156          
+ 157          void     WIZCHIP_WRITE_BUF(uint32_t AddrSel, uint8_t* pBuf, uint16_t len)
+ 158          {
+ 159   1         uint8_t spi_data[3];
+ 160   1         uint16_t i;
+ 161   1      
+ 162   1         WIZCHIP_CRITICAL_ENTER();
+ 163   1         WIZCHIP.CS._select();
+ 164   1      
+ 165   1         AddrSel |= (_W5500_SPI_WRITE_ | _W5500_SPI_VDM_OP_);
+ 166   1      
+ 167   1         if(!WIZCHIP.IF.SPI._write_burst)   // byte operation
+ 168   1         {
+ 169   2          WIZCHIP.IF.SPI._write_byte((AddrSel & 0x00FF0000) >> 16);
+ 170   2          WIZCHIP.IF.SPI._write_byte((AddrSel & 0x0000FF00) >>  8);
+ 171   2          WIZCHIP.IF.SPI._write_byte((AddrSel & 0x000000FF) >>  0);
+ 172   2          for(i = 0; i < len; i++)
+ 173   2            WIZCHIP.IF.SPI._write_byte(pBuf[i]);
+ 174   2         }
+ 175   1         else                 // burst operation
+ 176   1         {
+C51 COMPILER V9.60.7.0   W5500                                                             05/29/2023 20:18:31 PAGE 4   
+
+ 177   2          spi_data[0] = (AddrSel & 0x00FF0000) >> 16;
+ 178   2          spi_data[1] = (AddrSel & 0x0000FF00) >> 8;
+ 179   2          spi_data[2] = (AddrSel & 0x000000FF) >> 0;
+ 180   2          WIZCHIP.IF.SPI._write_burst(spi_data, 3);
+ 181   2          WIZCHIP.IF.SPI._write_burst(pBuf, len);
+ 182   2         }
+ 183   1      
+ 184   1         WIZCHIP.CS._deselect();
+ 185   1         WIZCHIP_CRITICAL_EXIT();
+ 186   1      }
+ 187          
+ 188          
+ 189          uint16_t getSn_TX_FSR(uint8_t sn)
+ 190          {
+ 191   1         uint16_t val=0,val1=0;
+ 192   1      
+ 193   1         do
+ 194   1         {
+ 195   2            val1 = WIZCHIP_READ(Sn_TX_FSR(sn));
+ 196   2            val1 = (val1 << 8) + WIZCHIP_READ(WIZCHIP_OFFSET_INC(Sn_TX_FSR(sn),1));
+ 197   2            if (val1 != 0)
+ 198   2            {
+ 199   3              val = WIZCHIP_READ(Sn_TX_FSR(sn));
+ 200   3              val = (val << 8) + WIZCHIP_READ(WIZCHIP_OFFSET_INC(Sn_TX_FSR(sn),1));
+ 201   3            }
+ 202   2         }while (val != val1);
+ 203   1         return val;
+ 204   1      }
+ 205          
+ 206          
+ 207          uint16_t getSn_RX_RSR(uint8_t sn)
+ 208          {
+ 209   1         uint16_t val=0,val1=0;
+ 210   1      
+ 211   1         do
+ 212   1         {
+ 213   2            val1 = WIZCHIP_READ(Sn_RX_RSR(sn));
+ 214   2            val1 = (val1 << 8) + WIZCHIP_READ(WIZCHIP_OFFSET_INC(Sn_RX_RSR(sn),1));
+ 215   2            if (val1 != 0)
+ 216   2            {
+ 217   3              val = WIZCHIP_READ(Sn_RX_RSR(sn));
+ 218   3              val = (val << 8) + WIZCHIP_READ(WIZCHIP_OFFSET_INC(Sn_RX_RSR(sn),1));
+ 219   3            }
+ 220   2         }while (val != val1);
+ 221   1         return val;
+ 222   1      }
+ 223          
+ 224          void wiz_send_data(uint8_t sn, uint8_t *wizdata, uint16_t len)
+ 225          {
+ 226   1         uint16_t ptr = 0;
+ 227   1         uint32_t addrsel = 0;
+ 228   1      
+ 229   1         if(len == 0)  return;
+ 230   1         ptr = getSn_TX_WR(sn);
+ 231   1         //M20140501 : implict type casting -> explict type casting
+ 232   1         //addrsel = (ptr << 8) + (WIZCHIP_TXBUF_BLOCK(sn) << 3);
+ 233   1         addrsel = ((uint32_t)ptr << 8) + (WIZCHIP_TXBUF_BLOCK(sn) << 3);
+ 234   1         //
+ 235   1         WIZCHIP_WRITE_BUF(addrsel,wizdata, len);
+ 236   1         
+ 237   1         ptr += len;
+ 238   1         setSn_TX_WR(sn,ptr);
+C51 COMPILER V9.60.7.0   W5500                                                             05/29/2023 20:18:31 PAGE 5   
+
+ 239   1      }
+ 240          
+ 241          void wiz_recv_data(uint8_t sn, uint8_t *wizdata, uint16_t len)
+ 242          {
+ 243   1         uint16_t ptr = 0;
+ 244   1         uint32_t addrsel = 0;
+ 245   1         
+ 246   1         if(len == 0) return;
+ 247   1         ptr = getSn_RX_RD(sn);
+ 248   1         //M20140501 : implict type casting -> explict type casting
+ 249   1         //addrsel = ((ptr << 8) + (WIZCHIP_RXBUF_BLOCK(sn) << 3);
+ 250   1         addrsel = ((uint32_t)ptr << 8) + (WIZCHIP_RXBUF_BLOCK(sn) << 3);
+ 251   1         //
+ 252   1         WIZCHIP_READ_BUF(addrsel, wizdata, len);
+ 253   1         ptr += len;
+ 254   1         
+ 255   1         setSn_RX_RD(sn,ptr);
+ 256   1      }
+ 257          
+ 258          
+ 259          void wiz_recv_ignore(uint8_t sn, uint16_t len)
+ 260          {
+ 261   1         uint16_t ptr = 0;
+ 262   1      
+ 263   1         ptr = getSn_RX_RD(sn);
+ 264   1         ptr += len;
+ 265   1         setSn_RX_RD(sn,ptr);
+ 266   1      }
+ 267          
+ 268          #endif
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   2847    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----      84
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

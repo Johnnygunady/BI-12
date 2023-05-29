@@ -1,0 +1,133 @@
+C51 COMPILER V9.60.7.0   DEVICE_INIT                                                       05/29/2023 20:18:30 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE DEVICE_INIT
+OBJECT MODULE PLACED IN .\Objects\Device_Init.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Device_Init.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\BI-12(1);.\wiznet
+                    -\Ethernet;.\wiznet\Ethernet\W5500;C:\Keil_v5\C51\INC;C:\Keil_v5\C51\INC\SiLABS;C:\Keil_v5\C51\LIB;C:\Keil_v5\C51\BIN;D:\
+                    -BI-12(1)) DEBUG OBJECTEXTEND PRINT(.\Listings\Device_Init.lst) TABS(2) OBJECT(.\Objects\Device_Init.obj)
+
+line level    source
+
+   1           /////////////////////////////////////
+   2          //  Generated Initialization File  //
+   3          /////////////////////////////////////
+   4          
+   5          #include "Device_Init.h"
+   6          
+   7          
+   8          // Peripheral specific initialization functions,
+   9          // Called from the Init_Device() function
+  10          void PCA_Init()
+  11          {
+  12   1          PCA0MD    &= ~0x40; //Watchdog timer is off
+  13   1          PCA0MD    = 0x00;   //?
+  14   1      }
+  15          
+  16          //void Timer_Init()
+  17          //{
+  18          //    TMOD      = 0x20; //Mode 2: 8-bit counter/timer with auto-reload
+  19          //    CKCON     = 0x08; //Timer 1 Clock Select.
+  20          //    TH1       = 0xBB; //High byte of 16-bit Timer is 10111011
+  21          //}
+  22          
+  23          /*void UART_Init()
+  24          {
+  25              SBRLL1    = 0x98;
+  26              SBRLH1    = 0xFF;
+  27              SCON1     = 0x10;
+  28              SBCON1    = 0x43;
+  29          }*/
+  30          
+  31          /*void SPI_Init()/*
+  32          {
+  33              SPI0CFG   = 0x40;
+  34              SPI0CN    = 0x01;
+  35          }*/
+  36          
+  37          void Port_IO_Init()
+  38          {
+  39   1          // P0.0  -  Unassigned,  Open-Drain, Digital
+  40   1          // P0.1  -  Unassigned,  Open-Drain, Digital
+  41   1          // P0.2  -  Unassigned,  Open-Drain, Digital
+  42   1          // P0.3  -  Unassigned,  Open-Drain, Digital
+  43   1          // P0.4  -  Unassigned,  Open-Drain, Digital
+  44   1          // P0.5  -  Unassigned,  Open-Drain, Digital
+  45   1          // P0.6  -  Unassigned,  Open-Drain, Digital
+  46   1          // P0.7  -  Unassigned,  Open-Drain, Digital
+  47   1      
+  48   1          // P1.0  -  Unassigned,  Open-Drain, Digital
+  49   1          // P1.1  -  Unassigned,  Open-Drain, Digital
+  50   1          // P1.2  -  Unassigned,  Open-Drain, Digital
+  51   1          // P1.3  -  Unassigned,  Push-Pull,  Digital
+  52   1          // P1.4  -  Unassigned,  Push-Pull,  Digital
+  53   1          // P1.5  -  Unassigned,  Push-Pull,  Digital
+C51 COMPILER V9.60.7.0   DEVICE_INIT                                                       05/29/2023 20:18:30 PAGE 2   
+
+  54   1          // P1.6  -  Unassigned,  Push-Pull,  Digital
+  55   1          // P1.7  -  Unassigned,  Open-Drain, Digital
+  56   1      
+  57   1          // P2.0  -  Unassigned,  Push-Pull,  Digital
+  58   1          // P2.1  -  Unassigned,  Push-Pull,  Digital
+  59   1          // P2.2  -  Unassigned,  Push-Pull,  Digital
+  60   1          // P2.3  -  Unassigned,  Push-Pull,  Digital
+  61   1          // P2.4  -  Unassigned,  Push-Pull,  Digital
+  62   1          // P2.5  -  Unassigned,  Push-Pull,  Digital
+  63   1          // P2.6  -  Unassigned,  Open-Drain, Digital
+  64   1          // P2.7  -  Unassigned,  Open-Drain, Digital
+  65   1      
+  66   1          // P3.0  -  Unassigned,  Push-Pull,  Digital
+  67   1          // P3.1  -  Unassigned,  Push-Pull,  Digital
+  68   1          // P3.2  -  Unassigned,  Push-Pull,  Digital
+  69   1          // P3.3  -  Unassigned,  Open-Drain, Digital
+  70   1          // P3.4  -  Unassigned,  Open-Drain, Digital
+  71   1          // P3.5  -  Unassigned,  Push-Pull,  Digital
+  72   1          // P3.6  -  Unassigned,  Open-Drain, Digital
+  73   1          // P3.7  -  Unassigned,  Open-Drain, Digital
+  74   1      
+  75   1          P1MDOUT   = 0x78;
+  76   1          P2MDOUT   = 0x3F;
+  77   1          P3MDOUT   = 0x27;
+  78   1          P4MDOUT   = 0xF8;
+  79   1          XBR1      = 0x40;
+  80   1      }
+  81          
+  82          void Oscillator_Init()
+  83          {
+  84   1      //    int i = 0;
+  85   1      //    CLKMUL    = 0x80;              // Clock Multiplier Enable
+  86   1      //    for (i = 0; i < 20; i++);      // Wait 5us for initialization
+  87   1      //    CLKMUL    |= 0xC0;             // Crystal Oscillator Mode
+  88   1      //    while ((CLKMUL & 0x20) == 0);  // Wait while Clock Multiplier not ready
+  89   1      //    CLKSEL    = 0x02;              //External Oscillator  4x Clock Multiplier / 2
+  90   1          OSCICN    = 0x83;              //Crystal Oscillator Mode & SYSCLK derived from Internal H-F Oscillator
+             - divided by 1.
+  91   1      }
+  92          
+  93          // Initialization function for device,
+  94          // Call Init_Device() from your main program
+  95          void Device_Init (void)
+  96          {
+  97   1          PCA_Init();
+  98   1          //Timer_Init();
+  99   1          //UART_Init();
+ 100   1          //SPI_Init();
+ 101   1          Port_IO_Init();
+ 102   1          Oscillator_Init();
+ 103   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     36    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.60.7.0   DEVICE_INIT                                                       05/29/2023 20:18:30 PAGE 3   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

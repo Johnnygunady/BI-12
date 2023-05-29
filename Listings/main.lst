@@ -1,0 +1,100 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              05/29/2023 20:18:30 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(..\BI-12(1);.\wiznet\Ethern
+                    -et;.\wiznet\Ethernet\W5500;C:\Keil_v5\C51\INC;C:\Keil_v5\C51\INC\SiLABS;C:\Keil_v5\C51\LIB;C:\Keil_v5\C51\BIN;D:\BI-12(1
+                    -)) DEBUG OBJECTEXTEND PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <stddef.h>
+   2          #include <stdint.h>
+   3          //#include <C51S.LIB>
+   4          
+   5          #include "my_wiznet.h"
+   6          #include "my_fnc.h"
+   7          #include "W5500/w5500.h"
+   8          #include "Device_Init.h"
+   9          
+  10          #include "SPI_Defs.h"
+  11          
+  12          const uint8_t xdata gw[4] = {172,20,215,254};
+  13          const uint8_t xdata mask[4] = {255,255,255,0};
+  14          const uint8_t xdata mac[6] = {0x7C,0x8A,0xE1,0x76,0x5E,0x4D};
+  15          const uint8_t xdata ipadr[4] = {172,20,215,250};  
+  16          
+  17          uint8_t a;
+  18          uint8_t   rx_buf[20] = {0};
+  19          uint16_t len, actual_len;
+  20          struct BlockStat StatData = {2, 2, 2, 2, 2, 2};
+  21          const uint16_t freqs[12] = {0x000A, 0x00C8, 0x012C, 0x03E8, 0x07D0, 0x09C4, 0x0BB8, 0x1356, 0x1388, 0x13BA
+             -, 0x2710, 0x5208};
+  22          
+  23          void wizchip_recv_data(struct BlockStat* StatData) {
+  24   1        len = getSn_RX_RSR(0);
+  25   1        actual_len = (len > getSn_RXBUF_SIZE(0)) ? getSn_RXBUF_SIZE(0) : len;
+  26   1        wiz_recv_data(0, rx_buf, actual_len);
+  27   1        wiz_send_data(0, &StatData, sizeof(StatData));
+*** WARNING C182 IN LINE 27 OF main.c: pointer to different objects
+  28   1        setSn_CR(0, Sn_CR_SEND);
+  29   1      }
+  30          
+  31          void main(void)
+  32          {
+  33   1        //Init 80c51
+  34   1        Device_Init();
+  35   1        
+  36   1        //Timer 0 init as 13-bit counter
+  37   1        TMOD = 0x00;
+  38   1        timer_start();
+*** WARNING C206 IN LINE 38 OF main.c: 'timer_start': missing function-prototype
+  39   1        
+  40   1        //Init w5500
+  41   1        wiz_init(gw, mask, mac, ipadr);
+  42   1      
+  43   1        while(1) {
+  44   2          switch(getSn_SR(0)) {
+  45   3            case(SOCK_CLOSED):
+  46   3              //START TCP SERVER
+  47   3              setSn_MR(0, Sn_MR_TCP);
+  48   3              setSn_PORT(0, 9999);
+  49   3              timectl();
+*** WARNING C206 IN LINE 49 OF main.c: 'timectl': missing function-prototype
+C51 COMPILER V9.60.7.0   MAIN                                                              05/29/2023 20:18:30 PAGE 2   
+
+  50   3              setSn_CR(0, Sn_CR_OPEN);
+  51   3              timectl();
+  52   3            case(SOCK_INIT): 
+  53   3              //LISTEN
+  54   3              setSn_CR(0, Sn_CR_LISTEN);
+  55   3              timectl();
+  56   3              break;
+  57   3            case(SOCK_CLOSE_WAIT):
+  58   3              //CHECK DISCONNECT-REQUEST AND DISCINNECT PROCESS
+  59   3              setSn_CR(0, Sn_CR_DISCON);
+  60   3              setSn_CR(0, Sn_CR_CLOSE);
+  61   3            case(SOCK_ESTABLISHED):
+  62   3              //ESTABLISHMENT
+  63   3              if(!getSn_RX_RSR(0)) {
+  64   4                wizchip_recv_data(&StatData);
+  65   4              }         
+  66   3            }
+  67   2        } 
+  68   1        
+  69   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    375    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     75       3
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  3 WARNING(S),  0 ERROR(S)

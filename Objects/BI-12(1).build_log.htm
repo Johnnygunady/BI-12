@@ -1,0 +1,72 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: fg ivan.kruglov.01@mail.ru, gfgf, LIC=JLB1Q-NZTL5-GV11T-R511U-4AUNW-NGD21
+ 
+Tool Versions:
+Toolchain:       PK51 Prof. Developers Kit  Version: 9.60.7.0
+Toolchain Path:  C:\Keil_v5\C51\BIN
+C Compiler:      C51.exe V9.60.7.0
+Assembler:       A51.exe V8.2.7.0
+Linker/Locator:  BL51.exe V6.22.4.0
+Library Manager: LIB51.exe V4.30.1.0
+Hex Converter:   OH51.exe V2.7.0.0
+CPU DLL:         S8051.DLL V3.125.1.0
+Dialog DLL:      DCYG.DLL V2.75.1.0
+    Target DLL: SiC8051F.dll
+Dialog DLL:      TCYG.DLL V2.72.1.0
+ 
+<h2>Project:</h2>
+D:\BI-12(1)\BI-12(1).uvproj
+Project File Date:  05/29/2023
+
+<h2>Output:</h2>
+Rebuild target 'Target 1'
+compiling main.c...
+main.c(27): warning C182: pointer to different objects
+main.c(38): warning C206: 'timer_start': missing function-prototype
+main.c(49): warning C206: 'timectl': missing function-prototype
+compiling Device_Init.c...
+compiling my_fnc.c...
+compiling wizchip_conf.c...
+wiznet\Ethernet\wizchip_conf.c(125): warning C280: 'wb': unreferenced local variable
+wiznet\Ethernet\wizchip_conf.c(133): warning C280: 'pBuf': unreferenced local variable
+wiznet\Ethernet\wizchip_conf.c(133): warning C280: 'len': unreferenced local variable
+wiznet\Ethernet\wizchip_conf.c(141): warning C280: 'pBuf': unreferenced local variable
+wiznet\Ethernet\wizchip_conf.c(141): warning C280: 'len': unreferenced local variable
+compiling w5500.c...
+assembling STARTUP.A51...
+compiling my_wiznet.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_FREQ_GEN?MY_FNC
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DACD?MY_FNC
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DACOS?MY_FNC
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DEV_MUX?MY_FNC
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_OUT_MUX?MY_FNC
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_REG_WIZCHIP_BUS_CBFUNC?WIZCHIP_CONF
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CTLWIZCHIP?WIZCHIP_CONF
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CTLNETWORK?WIZCHIP_CONF
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WIZPHY_GETPHYSTAT?WIZCHIP_CONF
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_GETSN_TX_FSR?W5500
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WIZ_RECV_IGNORE?W5500
+Program Size: data=9.0 xdata=241 code=9430
+".\Objects\BI-12(1)" - 0 Error(s), 19 Warning(s).
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>
