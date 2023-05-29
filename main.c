@@ -15,14 +15,14 @@ const uint8_t xdata mac[6] = {0x7C,0x8A,0xE1,0x76,0x5E,0x4D};
 const uint8_t xdata ipadr[4] = {172,20,215,250};	
 
 uint8_t a;
-uint8_t   rx_buf[20] = {0};
+uint8_t   rx_buf[24] = {0};
 uint16_t len, actual_len;
 struct BlockStat StatData = {2, 2, 2, 2, 2, 2};
 const uint16_t freqs[12] = {0x000A, 0x00C8, 0x012C, 0x03E8, 0x07D0, 0x09C4, 0x0BB8, 0x1356, 0x1388, 0x13BA, 0x2710, 0x5208};
 
 void wizchip_recv_data(struct BlockStat* StatData) {
 	len = getSn_RX_RSR(0);
-	actual_len = (len > getSn_RXBUF_SIZE(0)) ? getSn_RXBUF_SIZE(0) : len;
+	actual_len = (len > sizeof(rx_buf)) ? sizof(rx_buf) : len;
 	wiz_recv_data(0, rx_buf, actual_len);
 	wiz_send_data(0, &StatData, sizeof(StatData));
 	setSn_CR(0, Sn_CR_SEND);
@@ -49,6 +49,7 @@ void main(void)
 				timectl();
 				setSn_CR(0, Sn_CR_OPEN);
 				timectl();
+				break;
 			case(SOCK_INIT): 
 				//LISTEN
 				setSn_CR(0, Sn_CR_LISTEN);
@@ -64,6 +65,6 @@ void main(void)
 					wizchip_recv_data(&StatData);
 				} 				
 			}
-	}	
+	}
 	
 }

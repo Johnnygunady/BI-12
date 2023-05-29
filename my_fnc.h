@@ -12,7 +12,7 @@ void delay(uint16_t);
 //Start timer#0
 void timer_start(void);
 
-//Delat 1ms
+//Delay 1ms
 void timectl(void);
 
 //Write to DDS chip freq
